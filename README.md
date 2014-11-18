@@ -36,4 +36,6 @@ Download and install the [workflow][download]. Edit the script filter to add you
 
 # Attributions
 
-- Icons from [Climacons](http://adamwhitcroft.com/climacons/)
+- [Climacons](http://adamwhitcroft.com/climacons/)
+- [Forecast API](https://developer.forecast.io/docs/v2)
+- [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/)
