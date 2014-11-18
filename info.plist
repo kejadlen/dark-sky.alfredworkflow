@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.kejadlen.forecast</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E2D96BA-31B2-4800-9A2B-B999285680A0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Alpha Chen</string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Forecast</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>http://forecast.io/#/f/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>5E2D96BA-31B2-4800-9A2B-B999285680A0</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>forecast</string>
+				<key>runningsubtext</key>
+				<string>Retriving location/weather...</string>
+				<key>script</key>
+				<string>export FORECAST_API_KEY=
+export GOOGLE_API_KEY=
+export DEFAULT_LOCATION="Seattle, WA"
+
+ruby forecast.rb {query}</string>
+				<key>title</key>
+				<string>Forecast</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>5E2D96BA-31B2-4800-9A2B-B999285680A0</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://github.com/kejadlen/forecast.workflow</string>
+</dict>
+</plist>
