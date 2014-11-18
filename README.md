@@ -15,8 +15,8 @@
 Install the workflow. Edit the script filter to add your location and API keys:
 
 - FORECAST_API_KEY: Get an API key [here][forecast-api-key].
-- GOOGLE_API_KEY: Get an API key [here][google-api-key]. Only required if
-  getting the forecast for an arbitrary location.
+- GOOGLE_API_KEY: Get an API key [here][google-api-key]. (Only required if
+  getting the forecast for an arbitrary location.)
 - DEFAULT_LOCATION
 - DEFAULT_LAT_LONG: Required if GOOGLE_API_KEY is not used. Format: `lat,long`.
 
