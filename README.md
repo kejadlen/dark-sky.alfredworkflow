@@ -12,13 +12,17 @@
 
 # Installation
 
-Install the workflow. Edit the script filter to add your location and API keys:
+Download and install the [workflow][download]. Edit the script filter to add your location and API keys:
 
-- FORECAST_API_KEY: Get an API key [here][forecast-api-key].
-- GOOGLE_API_KEY: Get an API key [here][google-api-key]. (Only required if
-  getting the forecast for an arbitrary location.)
-- DEFAULT_LOCATION
-- DEFAULT_LAT_LONG: Required if GOOGLE_API_KEY is not used. Format: `lat,long`.
+[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/0.0.1/Forecast.alfredworkflow
+
+- `FORECAST_API_KEY`: Get an API key [here][forecast-api-key].
+- `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding.
+  If you never need to search for a location, this can be omitted by using
+  `DEFAULT_LAT_LONG`.)
+- `DEFAULT_LOCATION`: Ex. "Seattle, WA".
+- `DEFAULT_LAT_LONG`: Only required if `GOOGLE_API_KEY` is unavailable, since
+  `DEFAULT_LOCATION` can't be geocoded. Format: `lat,long`.
 
 [forecast-api-key]: https://developer.forecast.io/register
 [google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
