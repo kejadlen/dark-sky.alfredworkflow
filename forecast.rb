@@ -80,7 +80,7 @@ items << Item.new(
   uid: :minutely,
   title: minutely['summary'],
   icon: "icons/#{ICONS[minutely['icon']]}.png",
-)
+) if minutely
 
 hourly = forecast['hourly']
 items << Item.new(
