@@ -33,6 +33,7 @@ Download and install the [workflow][download]. Edit the script filter to add you
 - Make installation easier
 - Handle errors gracefully
 - Caching? (Probably unnecessary...)
+- Use `Accept-Encoding: gzip` for Forecast calls
 
 # Attributions
 
