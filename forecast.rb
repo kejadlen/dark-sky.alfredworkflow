@@ -46,7 +46,7 @@ end
 
 query = ARGV.shift || ''
 location = if query.empty?
-             lat, long = ENV.fetch('DEFAULT_LAT_LONG', '').split(?,)
+             lat, long = ENV.fetch('DEFAULT_LAT_LONG', '').split(?,).map(&:to_f)
              Location.new(ENV['DEFAULT_LOCATION'], lat, long)
            else
              Location.new(query)
