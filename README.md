@@ -2,7 +2,7 @@
 
 ![screenshot][screenshot]
 
-[screenshot]: http://i.imgur.com/enspDWu.png
+[screenshot]: http://i.imgur.com/mxGnovo.png
 
 # Requirements
 
