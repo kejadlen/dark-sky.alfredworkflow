@@ -1,17 +1,17 @@
 class Spark
-  TICKS = %w[▁ ▂ ▃ ▄ ▅ ▆ ▇ █]
+  # TICKS = %w[▁ ▂ ▃ ▄ ▅ ▆ ▇ █] # Alfred doesn't render the last bar correctly
+                                # for some reason...
+  TICKS = %w[▁ ▂ ▃ ▄ ▅ ▆ ▇]
 
-  attr_reader :data
+  attr_reader :data, :min, :max
 
-  def initialize(*data)
+  def initialize(data, **kwargs)
     @data = data
+    @min = kwargs.fetch(:min) { 0 }
+    @max = (kwargs.fetch(:max) { data.max }).to_f
   end
 
   def to_s
-    min = data.min
-    max = data.max
-    range = (max - min).to_f
-    graph = data.map {|i| TICKS[(TICKS.size - 1) * (i - min) / range] }.join
-    "#{min} #{graph} #{max}"
+    data.map {|i| TICKS[(TICKS.size - 1) * (i - min) / max] }.join
   end
 end

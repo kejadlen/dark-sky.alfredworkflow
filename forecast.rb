@@ -5,6 +5,7 @@ require 'yaml'
 require_relative 'alfred'
 require_relative 'forecaster'
 require_relative 'location'
+require_relative 'spark'
 
 ICONS = {
   'clear-day' => 'Sun',
@@ -76,16 +77,45 @@ items << Item.new(
 )
 
 minutely = forecast['minutely']
-items << Item.new(
-  uid: :minutely,
-  title: minutely['summary'],
-  icon: "icons/#{ICONS[minutely['icon']]}.png",
-) if minutely
+if minutely
+  intensity = minutely['data'].map {|m| m['precipIntensity'] }
+  intensity = intensity.select.with_index {|_,i| i % 5 == 0 }
+  min, max = intensity.minmax
+
+  subtitle = ["#{min.round(3)}\" #{Spark.new(intensity)} #{max.round(3)}\""]
+
+  probability = minutely['data'].map {|m| m['precipProbability'] }
+  probability = probability.select.with_index {|_,i| i % 5 == 0 }
+  min, max = probability.minmax.map {|i| (100 * i).round }
+
+  subtitle << "#{min}% #{Spark.new(probability, min: 0, max: 1)} #{max}%"
+
+  items << Item.new(
+    uid: :minutely,
+    title: minutely['summary'],
+    subtitle: subtitle.join(' · '),
+    icon: "icons/#{ICONS[minutely['icon']]}.png",
+  )
+end
 
 hourly = forecast['hourly']
+
+intensity = hourly['data'].map {|m| m['precipIntensity'] }
+intensity = intensity.select.with_index {|_,i| i % 4 == 0 }
+min, max = intensity.minmax
+
+subtitle = ["#{min.round(3)}\" #{Spark.new(intensity)} #{max.round(3)}\""]
+
+probability = hourly['data'].map {|m| m['precipProbability'] }
+probability = probability.select.with_index {|_,i| i % 4 == 0 }
+min, max = probability.minmax.map {|i| (100 * i).round }
+
+subtitle << "#{min}% #{Spark.new(probability, min: 0, max: 1)} #{max}%"
+
 items << Item.new(
   uid: :hourly,
   title: hourly['summary'],
+  subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[hourly['icon']]}.png",
 )
 

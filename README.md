@@ -29,7 +29,6 @@ Download and install the [workflow][download]. Edit the script filter to add you
 
 # TODO
 
-- Sparklines for precipitation?
 - Make installation easier
 - Handle errors gracefully
 - Caching? (Probably unnecessary...)
