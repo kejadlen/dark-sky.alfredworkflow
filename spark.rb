@@ -6,9 +6,9 @@ class Spark
   attr_reader :data, :min, :max
 
   def initialize(data, **kwargs)
-    @data = data
+    @data = data.map(&:round)
     @min = kwargs.fetch(:min) { 0 }
-    @max = (kwargs.fetch(:max) { data.max }).to_f
+    @max = [(kwargs.fetch(:max) { data.max }).to_f, 1.0].max
   end
 
   def to_s
