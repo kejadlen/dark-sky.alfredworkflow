@@ -1,3 +1,7 @@
+require 'delegate'
+require 'erb'
+require 'yaml'
+
 class Items < DelegateClass(Array)
   attr_reader :items
 
@@ -40,5 +44,46 @@ class Item
 % end
 </item>
     XML
+  end
+end
+
+module Alfred
+  class Config
+    def self.[](key)
+      config[key]
+    end
+
+    def self.[]=(key, value)
+      config[key] = value
+    end
+
+    def self.config
+      return @config if defined?(@config)
+
+      bundle_id = `/usr/libexec/PlistBuddy info.plist -c 'print :bundleid'`.strip
+      @config = self.new(bundle_id)
+    end
+
+    WORKFLOW_DATA = '~/Library/Application Support/Alfred 2/Workflow Data/'
+
+    attr_reader :path
+    attr_accessor :config
+
+    def initialize(bundle_id)
+      dir = File.expand_path(File.join(WORKFLOW_DATA, bundle_id))
+      Dir.mkdir(dir) unless Dir.exist?(dir)
+
+      @path = File.join(dir, 'config.yml')
+      @config = File.exist?(@path) ? YAML.load_file(@path) : {}
+    end
+
+    def [](key)
+      config.fetch(key) { '' }
+    end
+
+    def []=(key, value)
+      config[key] = value
+      File.write(path, YAML.dump(config))
+    end
   end
 end
