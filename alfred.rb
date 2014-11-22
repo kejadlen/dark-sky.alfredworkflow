@@ -1,4 +1,5 @@
 require 'delegate'
+require 'erb'
 require 'yaml'
 
 class Items < DelegateClass(Array)
@@ -77,12 +78,12 @@ module Alfred
     end
 
     def [](key)
-      config[key]
+      config.fetch(key) { '' }
     end
 
     def []=(key, value)
       config[key] = value
-      File.write(path, config)
+      File.write(path, YAML.dump(config))
     end
   end
 end

@@ -2,6 +2,8 @@ require 'json'
 require 'open-uri'
 require 'uri'
 
+require_relative 'alfred'
+
 Geocoder = Struct.new(:api_key) do
   def self.geocode(location)
     geocoder.geocode(location)
@@ -10,7 +12,7 @@ Geocoder = Struct.new(:api_key) do
   def self.geocoder
     return @geocoder if defined?(@geocoder)
 
-    @geocoder = self.new(ENV['GOOGLE_API_KEY'])
+    @geocoder = self.new(Alfred::Config['GOOGLE_API_KEY'])
   end
 
   def geocode(location)

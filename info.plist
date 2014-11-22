@@ -19,6 +19,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>450E8285-E286-4D33-AADF-1ACF99F41031</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>373F7A50-59E2-4225-B665-E63FBBBAF7E5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Alpha Chen</string>
@@ -59,11 +70,7 @@
 				<key>runningsubtext</key>
 				<string>Retriving location/weather...</string>
 				<key>script</key>
-				<string>export FORECAST_API_KEY=
-export GOOGLE_API_KEY=
-export DEFAULT_LOCATION="Seattle, WA"
-
-ruby forecast.rb {query}</string>
+				<string>ruby forecast.rb {query}</string>
 				<key>title</key>
 				<string>Forecast</string>
 				<key>type</key>
@@ -78,6 +85,48 @@ ruby forecast.rb {query}</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>ruby -r./alfred -e "{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>373F7A50-59E2-4225-B665-E63FBBBAF7E5</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>forecast-config</string>
+				<key>script</key>
+				<string>ruby forecast-config.rb {query}</string>
+				<key>title</key>
+				<string>Configure the Forecast workflow</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>450E8285-E286-4D33-AADF-1ACF99F41031</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -88,6 +137,16 @@ ruby forecast.rb {query}</string>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
+		<key>373F7A50-59E2-4225-B665-E63FBBBAF7E5</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>450E8285-E286-4D33-AADF-1ACF99F41031</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
 		<key>5E2D96BA-31B2-4800-9A2B-B999285680A0</key>
 		<dict>
 			<key>ypos</key>
@@ -95,6 +154,6 @@ ruby forecast.rb {query}</string>
 		</dict>
 	</dict>
 	<key>webaddress</key>
-	<string>http://github.com/kejadlen/forecast.workflow</string>
+	<string>http://github.com/kejadlen/forecast.alfredworkflow</string>
 </dict>
 </plist>

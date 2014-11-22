@@ -47,8 +47,8 @@ end
 
 query = ARGV.shift || ''
 location = if query.empty?
-             lat, long = ENV.fetch('DEFAULT_LAT_LONG', '').split(?,).map(&:to_f)
-             Location.new(ENV['DEFAULT_LOCATION'].to_s, lat, long)
+             lat, long = Alfred::Config['DEFAULT_LAT_LONG'].split(?,).map(&:to_f)
+             Location.new(Alfred::Config['DEFAULT_LOCATION'], lat, long)
            else
              Location.new(query)
            end
