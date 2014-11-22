@@ -1,3 +1,8 @@
+## 0.0.5 - 2014.11.22
+### Changed
+- Use `forecast-config` for managing API keys.
+- Fixed bug when precipitation intensity/probability was all 0's.
+
 ## 0.0.4 - 2014.11.21
 ### Added
 - Sparklines for precipitation intensity and probability for the next hour

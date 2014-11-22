@@ -12,9 +12,11 @@
 
 # Installation
 
-Download and install the [workflow][download]. Edit the script filter to add your location and API keys:
+Download and install the [workflow][download].
 
-[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/0.0.1/Forecast.alfredworkflow
+[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/0.0.5/Forecast.alfredworkflow
+
+Run `forecast-config VALUE` to set API keys and the default location:
 
 - `FORECAST_API_KEY`: Get an API key [here][forecast-api-key].
 - `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding.
@@ -29,7 +31,6 @@ Download and install the [workflow][download]. Edit the script filter to add you
 
 # TODO
 
-- Make installation easier
 - Handle errors gracefully
 - Caching? (Probably unnecessary...)
 - Use `Accept-Encoding: gzip` for Forecast calls
