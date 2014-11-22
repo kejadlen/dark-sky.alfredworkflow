@@ -110,9 +110,9 @@
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>keyword</key>
-				<string>forecast-config</string>
+				<string>config-forecast</string>
 				<key>script</key>
-				<string>ruby forecast-config.rb {query}</string>
+				<string>ruby config-forecast.rb {query}</string>
 				<key>title</key>
 				<string>Configure the Forecast workflow</string>
 				<key>type</key>
