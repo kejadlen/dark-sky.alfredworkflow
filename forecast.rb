@@ -78,11 +78,12 @@ items << Item.new(
 
 minutely = forecast['minutely']
 if minutely
-  intensity = minutely['data'].map {|m| 1000 * m['precipIntensity'] }
-  intensity = intensity.select.with_index {|_,i| i % 5 == 0 }
+  intensity = minutely['data'].map {|m| m['precipIntensity'] }
+  intensity = intensity.select.with_index {|_,i| i % 4 == 0 }
   min, max = intensity.minmax
+  intensity = intensity.map {|i| 1000 * i }
 
-  subtitle = ["#{min.round}\" #{Spark.new(intensity)} #{max.round}\""]
+  subtitle = ["#{min.round(3)}\" #{Spark.new(intensity)} #{max.round(3)}\""]
 
   probability = minutely['data'].map {|m| (100 * m['precipProbability']).round }
   probability = probability.select.with_index {|_,i| i % 5 == 0 }
@@ -100,11 +101,12 @@ end
 
 hourly = forecast['hourly']
 
-intensity = hourly['data'].map {|m| 1000 * m['precipIntensity'] }
+intensity = hourly['data'].map {|m| m['precipIntensity'] }
 intensity = intensity.select.with_index {|_,i| i % 4 == 0 }
 min, max = intensity.minmax
+intensity = intensity.map {|i| 1000 * i }
 
-subtitle = ["#{min.round}\" #{Spark.new(intensity)} #{max.round}\""]
+subtitle = ["#{min.round(3)}\" #{Spark.new(intensity)} #{max.round(3)}\""]
 
 probability = hourly['data'].map {|m| (100 * m['precipProbability']).round }
 probability = probability.select.with_index {|_,i| i % 4 == 0 }
