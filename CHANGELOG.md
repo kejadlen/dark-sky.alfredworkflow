@@ -1,3 +1,7 @@
+## 0.0.6 - 2014.12.13
+### Added
+- Add option to force Celsius/Fahrenheit using `FORECAST_UNITS`.
+
 ## 0.0.5 - 2014.11.22
 ### Changed
 - Use `forecast-config` for managing API keys.

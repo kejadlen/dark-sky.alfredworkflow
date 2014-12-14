@@ -64,6 +64,7 @@ module Alfred
       @config = self.new(bundle_id)
     end
 
+    DEFAULTS = { 'FORECAST_UNITS' => 'auto' }
     WORKFLOW_DATA = '~/Library/Application Support/Alfred 2/Workflow Data/'
 
     attr_reader :path
@@ -78,7 +79,7 @@ module Alfred
     end
 
     def [](key)
-      config.fetch(key) { '' }
+      config.fetch(key) { DEFAULTS.fetch(key) { '' } }
     end
 
     def []=(key, value)

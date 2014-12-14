@@ -16,7 +16,8 @@ Forecaster = Struct.new(:api_key) do
 
   def forecast(location)
     lat, long = location.lat, location.long
-    url = "https://api.forecast.io/forecast/#{api_key}/#{lat},#{long}?units=auto"
+    units = Alfred::Config['FORECAST_UNITS']
+    url = "https://api.forecast.io/forecast/#{api_key}/#{lat},#{long}?units=#{units}"
     response = JSON.load(open(url))
   end
 end

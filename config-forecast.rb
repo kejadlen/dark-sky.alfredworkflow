@@ -3,7 +3,8 @@ require_relative 'alfred'
 OPTIONS = %w[ FORECAST_API_KEY
               GOOGLE_API_KEY
               DEFAULT_LOCATION
-              DEFAULT_LAT_LONG ]
+              DEFAULT_LAT_LONG
+              FORECAST_UNITS ]
 
 input = ARGV.shift || ''
 
