@@ -1,3 +1,12 @@
+## Current
+### Added
+- The current location is retrieved via IP geolocation rather than set in the
+  workflow configuration.
+
+### Removed
+- Support for `DEFAULT_LAT_LONG` and `DEFAULT_LOCATION` has been deprecated in favor
+  of getting the current location from the IP.
+
 ## 0.0.6 - 2014.12.13
 ### Added
 - Add option to force Celsius/Fahrenheit using `FORECAST_UNITS`.
