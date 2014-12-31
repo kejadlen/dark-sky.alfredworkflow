@@ -46,12 +46,7 @@ Precipitation = Struct.new(:intensity, :probability) do
 end
 
 query = ARGV.shift || ''
-location = if query.empty?
-             lat, long = Alfred::Config['DEFAULT_LAT_LONG'].split(?,).map(&:to_f)
-             Location.new(Alfred::Config['DEFAULT_LOCATION'], lat, long)
-           else
-             Location.new(query)
-           end
+location = (query.empty?) ? Location.from_ip : Location.new(query)
 forecast = Forecaster.forecast(location)
 
 items = Items.new
