@@ -2,6 +2,7 @@
 ### Added
 - The current location is retrieved via IP geolocation rather than set in the
   workflow configuration.
+- Fixed opening the forecast in the browser.
 
 ### Removed
 - Support for `DEFAULT_LAT_LONG` and `DEFAULT_LOCATION` has been deprecated in favor

@@ -12,7 +12,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>5E2D96BA-31B2-4800-9A2B-B999285680A0</string>
+				<string>33090727-8355-4B40-9BAF-041ABA0FF0E4</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -44,17 +44,17 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>plusspaces</key>
-				<false/>
-				<key>url</key>
-				<string>http://forecast.io/#/f/{query}</string>
-				<key>utf8</key>
-				<true/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>open "http://forecast.io/#/f/{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>5E2D96BA-31B2-4800-9A2B-B999285680A0</string>
+			<string>33090727-8355-4B40-9BAF-041ABA0FF0E4</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -137,6 +137,11 @@
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
+		<key>33090727-8355-4B40-9BAF-041ABA0FF0E4</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
 		<key>373F7A50-59E2-4225-B665-E63FBBBAF7E5</key>
 		<dict>
 			<key>ypos</key>
@@ -146,11 +151,6 @@
 		<dict>
 			<key>ypos</key>
 			<real>130</real>
-		</dict>
-		<key>5E2D96BA-31B2-4800-9A2B-B999285680A0</key>
-		<dict>
-			<key>ypos</key>
-			<real>10</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>
