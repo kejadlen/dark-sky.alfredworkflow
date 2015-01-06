@@ -1,4 +1,6 @@
 ## Current
+
+## 0.0.7 - 2015.01.05
 ### Added
 - The current location is retrieved via IP geolocation rather than set in the
   workflow configuration.
