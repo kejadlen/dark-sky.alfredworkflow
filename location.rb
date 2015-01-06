@@ -1,3 +1,6 @@
+require 'json'
+require 'open-uri'
+
 require_relative 'geocoder'
 
 class Location
