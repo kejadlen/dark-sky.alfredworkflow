@@ -1,5 +1,9 @@
 ## Current
 
+## 0.0.8 - 2015.05.31
+### Added
+- Re-add support for `DEFAULT_LAT_LONG` and `DEFAULT_LOCATION`.
+
 ## 0.0.7 - 2015.01.05
 ### Added
 - The current location is retrieved via IP geolocation rather than set in the

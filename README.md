@@ -24,6 +24,8 @@ Run `forecast-config VALUE` to set API keys and the default location:
   location*.)
 - `FORECAST_UNITS`: Defaults to `auto`, which sets the units based on the
   location. Use `si` for Celsius and `us` for Fahrenheit.
+- `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex: `47.7396,-122.3426` for Seattle.
+- `DEFAULT_LOCATION`: Used for displaying the location name when using `DEFAULT_LAT_LONG`.
 
 [forecast-api-key]: https://developer.forecast.io/register
 [google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
