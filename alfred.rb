@@ -23,6 +23,7 @@ end
 class Item
   attr_reader *%i[ uid arg valid
                    title subtitle icon ]
+
   def initialize(**kwargs)
     @uid = kwargs.fetch(:uid).to_s.encode(xml: :attr)
     @arg = kwargs[:arg].to_s.encode(xml: :attr)

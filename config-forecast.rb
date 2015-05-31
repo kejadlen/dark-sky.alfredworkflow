@@ -1,8 +1,12 @@
 require_relative 'alfred'
 
-OPTIONS = %w[ FORECAST_API_KEY
-              GOOGLE_API_KEY
-              FORECAST_UNITS ]
+OPTIONS = %w[
+  FORECAST_API_KEY
+  GOOGLE_API_KEY
+  FORECAST_UNITS
+  DEFAULT_LOCATION
+  DEFAULT_LAT_LONG
+]
 
 input = ARGV.shift || ''
 

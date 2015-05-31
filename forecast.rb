@@ -8,15 +8,15 @@ require_relative 'location'
 require_relative 'spark'
 
 ICONS = {
-  'clear-day' => 'Sun',
-  'clear-night' => 'Moon',
-  'rain' => 'Cloud-Rain',
-  'snow' => 'Cloud-Snow',
-  'sleet' => 'Cloud-Snow-Alt',
-  'wind' => 'Wind',
-  'fog' => 'Cloud-Fog',
-  'cloudy' => 'Cloud',
-  'partly-cloudy-day' => 'Cloud-Sun',
+  'clear-day'           => 'Sun',
+  'clear-night'         => 'Moon',
+  'rain'                => 'Cloud-Rain',
+  'snow'                => 'Cloud-Snow',
+  'sleet'               => 'Cloud-Snow-Alt',
+  'wind'                => 'Wind',
+  'fog'                 => 'Cloud-Fog',
+  'cloudy'              => 'Cloud',
+  'partly-cloudy-day'   => 'Cloud-Sun',
   'partly-cloudy-night' => 'Cloud-Moon',
 }
 
