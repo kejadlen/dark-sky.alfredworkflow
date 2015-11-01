@@ -66,7 +66,7 @@ items << Alphred::Item.new(
   arg: "#{location.lat.round(4)},#{location.long.round(4)}",
   valid: true,
   title: location.name,
-  icon: 'icons/forecast.ico',
+  icon: 'icons/forecast.png',
 )
 
 currently = forecast['currently']
