@@ -8,22 +8,22 @@
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
-		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
+		<key>04EA4664-95DC-4438-8978-79A17ED2FF40</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>33090727-8355-4B40-9BAF-041ABA0FF0E4</string>
+				<string>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 			</dict>
 		</array>
-		<key>450E8285-E286-4D33-AADF-1ACF99F41031</key>
+		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>373F7A50-59E2-4225-B665-E63FBBBAF7E5</string>
+				<string>F496E087-4042-44E7-B07E-71986ED6CDBA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -44,29 +44,20 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>open "http://forecast.io/#/f/{query}"</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>33090727-8355-4B40-9BAF-041ABA0FF0E4</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>keyword</key>
 				<string>forecast</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Retriving location/weather...</string>
 				<key>script</key>
@@ -88,17 +79,19 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>ruby -r./alfred -e "{query}"</string>
+				<string>open "http://forecast.io/#/f/{query}"</string>
 				<key>type</key>
 				<integer>0</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.script</string>
 			<key>uid</key>
-			<string>373F7A50-59E2-4225-B665-E63FBBBAF7E5</string>
+			<string>F496E087-4042-44E7-B07E-71986ED6CDBA</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -108,13 +101,21 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>127</integer>
+				<integer>102</integer>
 				<key>keyword</key>
-				<string>config-forecast</string>
+				<string>debug-forecast</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>script</key>
-				<string>ruby config-forecast.rb {query}</string>
+				<string>ruby -r./config -e'puts Forecast::Config.filter_xml("{query}")'</string>
 				<key>title</key>
-				<string>Configure the Forecast workflow</string>
+				<string>debug forecast</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -123,7 +124,26 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>450E8285-E286-4D33-AADF-1ACF99F41031</string>
+			<string>04EA4664-95DC-4438-8978-79A17ED2FF40</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>ruby -r./config -e'Forecast::Config.update!("{query}")'</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.script</string>
+			<key>uid</key>
+			<string>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -132,25 +152,25 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>04EA4664-95DC-4438-8978-79A17ED2FF40</key>
+		<dict>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
-		<key>33090727-8355-4B40-9BAF-041ABA0FF0E4</key>
+		<key>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</key>
+		<dict>
+			<key>ypos</key>
+			<real>120</real>
+		</dict>
+		<key>F496E087-4042-44E7-B07E-71986ED6CDBA</key>
 		<dict>
 			<key>ypos</key>
 			<real>10</real>
-		</dict>
-		<key>373F7A50-59E2-4225-B665-E63FBBBAF7E5</key>
-		<dict>
-			<key>ypos</key>
-			<real>130</real>
-		</dict>
-		<key>450E8285-E286-4D33-AADF-1ACF99F41031</key>
-		<dict>
-			<key>ypos</key>
-			<real>130</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

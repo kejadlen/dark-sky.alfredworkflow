@@ -1,5 +1,9 @@
 ## Current
 
+## 1.0.0 - 2015.11.01
+### Changed
+- Use [Alphred](https://github.com/kejadlen/alphred)
+
 ## 0.0.8 - 2015.05.31
 ### Added
 - Re-add support for `DEFAULT_LAT_LONG` and `DEFAULT_LOCATION`.

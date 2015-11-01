@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 require 'uri'
 
-require_relative 'alfred'
+require_relative 'config'
 
 Geocoder = Struct.new(:api_key) do
   def self.geocode(location)
@@ -12,7 +12,7 @@ Geocoder = Struct.new(:api_key) do
   def self.geocoder
     return @geocoder if defined?(@geocoder)
 
-    @geocoder = self.new(Alfred::Config['GOOGLE_API_KEY'])
+    @geocoder = self.new(Forecast::Config['GOOGLE_API_KEY'])
   end
 
   def geocode(location)

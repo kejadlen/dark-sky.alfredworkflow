@@ -1,8 +1,9 @@
-require 'delegate'
-require 'erb'
-require 'yaml'
+$LOAD_PATH.unshift(File.expand_path("../vendor/bundle", __FILE__))
+require "bundler/setup"
 
-require_relative 'alfred'
+require "alphred"
+
+require_relative 'config'
 require_relative 'forecaster'
 require_relative 'location'
 require_relative 'spark'
@@ -47,20 +48,20 @@ end
 
 query = ARGV.shift || ''
 location = if query.empty?
-             if Alfred::Config['DEFAULT_LAT_LONG'].empty?
+             if Forecast::Config['DEFAULT_LAT_LONG'].empty?
                Location.from_ip
              else
-               lat, long = Alfred::Config['DEFAULT_LAT_LONG'].split(?,).map(&:to_f)
-               Location.new(Alfred::Config['DEFAULT_LOCATION'], lat, long)
+               lat, long = Forecast::Config['DEFAULT_LAT_LONG'].split(?,).map(&:to_f)
+               Location.new(Forecast::Config['DEFAULT_LOCATION'], lat, long)
              end
            else
              Location.new(query)
            end
 forecast = Forecaster.forecast(location)
 
-items = Items.new
+items = Alphred::Items.new
 
-items << Item.new(
+items << Alphred::Item.new(
   uid: :location,
   arg: "#{location.lat.round(4)},#{location.long.round(4)}",
   valid: true,
@@ -73,7 +74,7 @@ precip = Precipitation.from_forecast(currently)
 subtitle = [ "#{currently['temperature'].round}°" ]
 subtitle << "Feels like #{currently['apparentTemperature'].round}°"
 subtitle << precip.to_s if precip.probability > 0
-items << Item.new(
+items << Alphred::Item.new(
   uid: :currently,
   title: currently['summary'],
   subtitle: subtitle.join(' · '),
@@ -95,7 +96,7 @@ if minutely
 
   subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
 
-  items << Item.new(
+  items << Alphred::Item.new(
     uid: :minutely,
     title: minutely['summary'],
     subtitle: subtitle.join(' · '),
@@ -118,7 +119,7 @@ min, max = probability.minmax
 
 subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
 
-items << Item.new(
+items << Alphred::Item.new(
   uid: :hourly,
   title: hourly['summary'],
   subtitle: subtitle.join(' · '),
@@ -133,7 +134,7 @@ forecast['daily']['data'][1..6].each do |data|
                "High: #{data['apparentTemperatureMax'].round}°" ]
   subtitle << precip.to_s if precip.probability > 0
 
-  items << Item.new(
+  items << Alphred::Item.new(
     uid: wday,
     title: "#{wday} - #{data['summary']}",
     subtitle: subtitle.join(' · '),
@@ -141,4 +142,4 @@ forecast['daily']['data'][1..6].each do |data|
   )
 end
 
-puts items.to_s
+puts items.to_xml
