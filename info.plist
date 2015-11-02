@@ -103,7 +103,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>debug-forecast</string>
+				<string>config-forecast</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -115,7 +115,7 @@
 				<key>script</key>
 				<string>ruby -r./config -e'puts Forecast::Config.filter_xml("{query}")'</string>
 				<key>title</key>
-				<string>debug forecast</string>
+				<string>Configure Forecast</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
