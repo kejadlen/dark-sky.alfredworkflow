@@ -1,5 +1,9 @@
 ## Current
 
+## 1.0.2 - 2015.11.01
+### Changed
+- Update Alphred to handle a crash when there isn't a config file.
+
 ## 1.0.0 - 2015.11.01
 ### Changed
 - Use [Alphred](https://github.com/kejadlen/alphred)
