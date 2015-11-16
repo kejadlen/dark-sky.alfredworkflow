@@ -16,7 +16,7 @@ Download and install the [workflow][download].
 
 [download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/0.0.5/Forecast.alfredworkflow
 
-Run `forecast-config VALUE` to set API keys and the default location:
+Run `config-forecast VALUE` to set API keys and the default location:
 
 - `FORECAST_API_KEY`: Get an API key [here][forecast-api-key].
 - `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding
