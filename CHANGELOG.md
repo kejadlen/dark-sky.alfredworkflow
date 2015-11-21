@@ -1,4 +1,6 @@
 ## Current
+### Changed
+- Delay fetching results until after the last character is typed.
 
 ## 1.0.2 - 2015.11.01
 ### Changed

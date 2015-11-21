@@ -44,6 +44,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>open "http://forecast.io/#/f/{query}"</string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.script</string>
+			<key>uid</key>
+			<string>F496E087-4042-44E7-B07E-71986ED6CDBA</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -51,11 +70,11 @@
 				<key>keyword</key>
 				<string>forecast</string>
 				<key>queuedelaycustom</key>
-				<integer>1</integer>
+				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<false/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
@@ -73,25 +92,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>0</integer>
-				<key>script</key>
-				<string>open "http://forecast.io/#/f/{query}"</string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.script</string>
-			<key>uid</key>
-			<string>F496E087-4042-44E7-B07E-71986ED6CDBA</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
