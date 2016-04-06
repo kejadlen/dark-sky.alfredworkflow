@@ -14,7 +14,7 @@
 
 Download and install the [workflow][download].
 
-[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/0.0.5/Forecast.alfredworkflow
+[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/v1.0.3/Forecast.alfredworkflow
 
 Run `config-forecast VALUE` to set API keys and the default location:
 
