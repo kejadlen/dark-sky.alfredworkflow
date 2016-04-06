@@ -1,7 +1,7 @@
-$LOAD_PATH.unshift(File.expand_path("../vendor/bundle", __FILE__))
-require "bundler/setup"
+$LOAD_PATH.unshift(File.expand_path('../vendor/bundle', __FILE__))
+require 'bundler/setup'
 
-require "alphred"
+require 'alphred'
 
 module Forecast
   Config = Alphred::Config.load(

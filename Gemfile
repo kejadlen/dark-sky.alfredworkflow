@@ -1,7 +1,8 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "alphred", "~> 1.1"
+gem 'alphred', '~> 1.2.1'
 
 group :development do
-  gem "pry"
+  gem 'pry'
+  gem 'rake'
 end
