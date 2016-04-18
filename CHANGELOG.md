@@ -1,3 +1,7 @@
+## [1.0.4] - 2016-04-17
+### Fixed
+- Update dependencies
+
 ## [1.0.3] - 2016-04-05
 ### Added
 - Delay fetching results until after the last character is typed.
