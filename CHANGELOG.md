@@ -1,3 +1,7 @@
+## Unreleased
+### Changed
+- Changed the 5-day window to include the current day.
+
 ## [1.0.4] - 2016-04-17
 ### Fixed
 - Update dependencies

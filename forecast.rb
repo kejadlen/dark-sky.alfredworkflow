@@ -1,7 +1,7 @@
-$LOAD_PATH.unshift(File.expand_path("../vendor/bundle", __FILE__))
-require "bundler/setup"
+$LOAD_PATH.unshift(File.expand_path('../vendor/bundle', __FILE__))
+require 'bundler/setup'
 
-require "alphred"
+require 'alphred'
 
 require_relative 'config'
 require_relative 'forecaster'
@@ -126,7 +126,7 @@ items << Alphred::Item.new(
   icon: "icons/#{ICONS[hourly['icon']]}.png",
 )
 
-forecast['daily']['data'][1..6].each do |data|
+forecast['daily']['data'][0..5].each do |data|
   wday = Time.at(data['time']).strftime('%A')
   precip = Precipitation.from_forecast(data)
 
