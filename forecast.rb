@@ -3,7 +3,6 @@ require 'bundler/setup'
 
 require 'alphred'
 
-require_relative 'config'
 require_relative 'forecaster'
 require_relative 'location'
 require_relative 'spark'
@@ -48,11 +47,11 @@ end
 
 query = ARGV.shift || ''
 location = if query.empty?
-             if Forecast::Config['DEFAULT_LAT_LONG'].empty?
+             if ENV['DEFAULT_LAT_LONG'].to_s.empty?
                Location.from_ip
              else
-               lat, long = Forecast::Config['DEFAULT_LAT_LONG'].split(?,).map(&:to_f)
-               Location.new(Forecast::Config['DEFAULT_LOCATION'], lat, long)
+               lat, long = ENV['DEFAULT_LAT_LONG'].to_s.split(?,).map(&:to_f)
+               Location.new(ENV['DEFAULT_LOCATION'].to_s, lat, long)
              end
            else
              Location.new(query)
@@ -142,4 +141,4 @@ forecast['daily']['data'][0..5].each do |data|
   )
 end
 
-puts items.to_xml
+puts items.to_json
