@@ -61,7 +61,6 @@ forecast = Forecaster.forecast(location)
 items = Alphred::Items.new
 
 items << Alphred::Item.new(
-  uid: :location,
   arg: "#{location.lat.round(4)},#{location.long.round(4)}",
   valid: true,
   title: location.name,
@@ -74,7 +73,6 @@ subtitle = [ "#{currently['temperature'].round}°" ]
 subtitle << "Feels like #{currently['apparentTemperature'].round}°"
 subtitle << precip.to_s if precip.probability > 0
 items << Alphred::Item.new(
-  uid: :currently,
   title: currently['summary'],
   subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[currently['icon']]}.png",
@@ -96,7 +94,6 @@ if minutely
   subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
 
   items << Alphred::Item.new(
-    uid: :minutely,
     title: minutely['summary'],
     subtitle: subtitle.join(' · '),
     icon: "icons/#{ICONS[minutely['icon']]}.png",
@@ -119,7 +116,6 @@ min, max = probability.minmax
 subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
 
 items << Alphred::Item.new(
-  uid: :hourly,
   title: hourly['summary'],
   subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[hourly['icon']]}.png",
@@ -134,7 +130,6 @@ forecast['daily']['data'][0..5].each do |data|
   subtitle << precip.to_s if precip.probability > 0
 
   items << Alphred::Item.new(
-    uid: wday,
     title: "#{wday} - #{data['summary']}",
     subtitle: subtitle.join(' · '),
     icon: "icons/#{ICONS[data['icon']]}.png",
