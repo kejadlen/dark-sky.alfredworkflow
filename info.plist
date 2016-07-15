@@ -8,19 +8,6 @@
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
-		<key>04EA4664-95DC-4438-8978-79A17ED2FF40</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
 		<array>
 			<dict>
@@ -111,106 +98,40 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>config-forecast</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string></string>
-				<key>script</key>
-				<string>ruby -r./config -e'puts Forecast::Config.filter_xml("{query}")'</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>Configure Forecast</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>04EA4664-95DC-4438-8978-79A17ED2FF40</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>ruby -r./config -e'Forecast::Config.update!("{query}")'</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>04EA4664-95DC-4438-8978-79A17ED2FF40</key>
-		<dict>
-			<key>xpos</key>
-			<integer>300</integer>
-			<key>ypos</key>
-			<real>120</real>
-		</dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
 		<dict>
 			<key>xpos</key>
-			<integer>300</integer>
+			<integer>190</integer>
 			<key>ypos</key>
-			<real>10</real>
-		</dict>
-		<key>EEDF82A8-40A8-4C05-9CFA-6669A97C0E46</key>
-		<dict>
-			<key>xpos</key>
-			<integer>700</integer>
-			<key>ypos</key>
-			<real>120</real>
+			<integer>140</integer>
 		</dict>
 		<key>F496E087-4042-44E7-B07E-71986ED6CDBA</key>
 		<dict>
 			<key>xpos</key>
-			<integer>700</integer>
+			<integer>590</integer>
 			<key>ypos</key>
-			<real>10</real>
+			<integer>140</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>FORECAST_API_KEY</key>
+		<string></string>
+		<key>GOOGLE_API_KEY</key>
+		<string></string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array>
+		<string>FORECAST_API_KEY</string>
+		<string>GOOGLE_API_KEY</string>
+	</array>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string>http://github.com/kejadlen/forecast.alfredworkflow</string>
 </dict>
