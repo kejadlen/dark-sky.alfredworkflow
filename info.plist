@@ -12,6 +12,19 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
 				<string>F496E087-4042-44E7-B07E-71986ED6CDBA</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -40,7 +53,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>open "http://forecast.io/#/f/{query}"</string>
+				<string>open "https://forecast.io/#/f/{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -98,6 +111,25 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<true/>
+				<key>matchmode</key>
+				<integer>1</integer>
+				<key>matchstring</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -109,6 +141,13 @@
 			<integer>190</integer>
 			<key>ypos</key>
 			<integer>140</integer>
+		</dict>
+		<key>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>430</integer>
+			<key>ypos</key>
+			<integer>170</integer>
 		</dict>
 		<key>F496E087-4042-44E7-B07E-71986ED6CDBA</key>
 		<dict>
