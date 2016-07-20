@@ -112,7 +112,7 @@ items << Alphred::Item.new(
   icon: "icons/#{ICONS[data['icon']]}.png",
 )
 
-forecast['daily']['data'][2..5].each do |data|
+forecast['daily']['data'][2..6].each do |data|
   wday = Time.at(data['time']).strftime('%A')
   precip = Precipitation.from_forecast(data)
 
