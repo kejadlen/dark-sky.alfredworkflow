@@ -2,7 +2,7 @@
 
 ![screenshot][screenshot]
 
-[screenshot]: http://i.imgur.com/mxGnovo.png
+[screenshot]: http://i.imgur.com/eZvpEN0.png
 
 # Requirements
 
@@ -16,7 +16,7 @@ Download and install the [workflow][download].
 
 [download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/v1.0.3/Forecast.alfredworkflow
 
-Run `config-forecast VALUE` to set API keys and the default location:
+These environment variables can be configured in Alfred:
 
 - `FORECAST_API_KEY`: Get an API key [here][forecast-api-key].
 - `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding
