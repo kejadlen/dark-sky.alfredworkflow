@@ -100,28 +100,19 @@ if minutely
   )
 end
 
-hourly = forecast['hourly']
-
-intensity = hourly['data'].map {|m| m['precipIntensity'] }
-intensity = intensity.select.with_index {|_,i| i % 4 == 0 }
-min, max = intensity.minmax
-intensity = intensity.map {|i| 1000 * i }
-
-subtitle = ["#{min.round(3)}\" #{Spark.new(intensity)} #{max.round(3)}\""]
-
-probability = hourly['data'].map {|m| (100 * m['precipProbability']).round }
-probability = probability.select.with_index {|_,i| i % 4 == 0 }
-min, max = probability.minmax
-
-subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
+data = forecast['daily']['data'][1]
+subtitle = [ "Low: #{data['apparentTemperatureMin'].round}°",
+             "High: #{data['apparentTemperatureMax'].round}°" ]
+precip = Precipitation.from_forecast(data)
+subtitle << precip.to_s if precip.probability > 0
 
 items << Alphred::Item.new(
-  title: hourly['summary'],
+  title: data['summary'],
   subtitle: subtitle.join(' · '),
-  icon: "icons/#{ICONS[hourly['icon']]}.png",
+  icon: "icons/#{ICONS[data['icon']]}.png",
 )
 
-forecast['daily']['data'][0..5].each do |data|
+forecast['daily']['data'][2..5].each do |data|
   wday = Time.at(data['time']).strftime('%A')
   precip = Precipitation.from_forecast(data)
 
