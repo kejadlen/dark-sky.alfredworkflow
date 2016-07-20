@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'alphred', github: 'kejadlen/alphred', ref: 'alfred-3'
+gem 'alphred', '~> 2.0'
 
 group :development do
   gem 'pry'
