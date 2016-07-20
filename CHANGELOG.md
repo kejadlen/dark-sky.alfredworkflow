@@ -1,6 +1,11 @@
-## Unreleased
+## [1.0.5] - 2016-07-20
+
 ### Changed
-- Changed the 5-day window to include the current day.
+- Update to Alfred 3: use built-in configuration for API keys.
+- Modified the data display for the current day.
+
+### Removed
+- Don't allow sorting of the items.
 
 ## [1.0.4] - 2016-04-17
 ### Fixed
