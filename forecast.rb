@@ -100,7 +100,7 @@ if minutely
   )
 end
 
-data = forecast['daily']['data'][1]
+data = forecast['daily']['data'][0]
 subtitle = [ "Low: #{data['apparentTemperatureMin'].round}°",
              "High: #{data['apparentTemperatureMax'].round}°" ]
 precip = Precipitation.from_forecast(data)
@@ -112,7 +112,7 @@ items << Alphred::Item.new(
   icon: "icons/#{ICONS[data['icon']]}.png",
 )
 
-forecast['daily']['data'][2..6].each do |data|
+forecast['daily']['data'][1..5].each do |data|
   wday = Time.at(data['time']).strftime('%A')
   precip = Precipitation.from_forecast(data)
 

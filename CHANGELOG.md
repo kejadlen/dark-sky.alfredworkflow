@@ -1,5 +1,8 @@
-## [1.0.5] - 2016-07-20
+## [1.0.6] - 2016-07-27
+### Fixed
+- Off by one error on which days to display
 
+## [1.0.5] - 2016-07-20
 ### Changed
 - Update to Alfred 3: use built-in configuration for API keys.
 - Modified the data display for the current day.
