@@ -57,11 +57,12 @@ location = if query.empty?
              Location.new(query)
            end
 forecast = Forecaster.forecast(location)
+arg = "#{location.lat.round(4)},#{location.long.round(4)}"
 
 items = Alphred::Items.new
 
 items << Alphred::Item.new(
-  arg: "#{location.lat.round(4)},#{location.long.round(4)}",
+  arg: arg,
   valid: true,
   title: location.name,
   icon: 'icons/forecast.png',
@@ -73,6 +74,7 @@ subtitle = [ "#{currently['temperature'].round}°" ]
 subtitle << "Feels like #{currently['apparentTemperature'].round}°"
 subtitle << precip.to_s if precip.probability > 0
 items << Alphred::Item.new(
+  arg: arg,
   title: currently['summary'],
   subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[currently['icon']]}.png",
@@ -94,6 +96,7 @@ if minutely
   subtitle << "#{min}% #{Spark.new(probability, max: 100)} #{max}%"
 
   items << Alphred::Item.new(
+    arg: arg,
     title: minutely['summary'],
     subtitle: subtitle.join(' · '),
     icon: "icons/#{ICONS[minutely['icon']]}.png",
@@ -107,7 +110,8 @@ precip = Precipitation.from_forecast(data)
 subtitle << precip.to_s if precip.probability > 0
 
 items << Alphred::Item.new(
-  title: data['summary'],
+  arg: arg,
+  title: "Today - #{data['summary']}",
   subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[data['icon']]}.png",
 )
@@ -121,6 +125,7 @@ forecast['daily']['data'][1..5].each do |data|
   subtitle << precip.to_s if precip.probability > 0
 
   items << Alphred::Item.new(
+    arg: arg,
     title: "#{wday} - #{data['summary']}",
     subtitle: subtitle.join(' · '),
     icon: "icons/#{ICONS[data['icon']]}.png",
