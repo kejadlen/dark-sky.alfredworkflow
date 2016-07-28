@@ -1,3 +1,7 @@
+## [1.0.7] - 2016-07-28
+### Fixed
+- Re-release to fix vendoring
+
 ## [1.0.6] - 2016-07-27
 ### Fixed
 - Off by one error on which days to display
