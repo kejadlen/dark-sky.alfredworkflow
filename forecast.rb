@@ -110,7 +110,7 @@ precip = Precipitation.from_forecast(data)
 subtitle << precip.to_s if precip.probability > 0
 
 items << Alphred::Item.new(
-  arg: arg,
+  arg: "#{arg}/#{data['time']}",
   title: "Today - #{data['summary']}",
   subtitle: subtitle.join(' · '),
   icon: "icons/#{ICONS[data['icon']]}.png",
@@ -125,7 +125,7 @@ forecast['daily']['data'][1..5].each do |data|
   subtitle << precip.to_s if precip.probability > 0
 
   items << Alphred::Item.new(
-    arg: arg,
+    arg: "#{arg}/#{data['time']}",
     title: "#{wday} - #{data['summary']}",
     subtitle: subtitle.join(' · '),
     icon: "icons/#{ICONS[data['icon']]}.png",

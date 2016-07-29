@@ -1,11 +1,15 @@
+## Unreleased
+### Added
+- Selecting a daily item now goes to the day on Forecast.io.
+
 ## [1.0.7] - 2016-07-28
 ### Fixed
-- Re-release to fix vendoring
+- Re-release to fix vendoring.
 
 ## [1.0.6] - 2016-07-27
 ### Fixed
-- Off by one error on which days to display
-- Re-enable going to the Forecast.io page on all items
+- Off by one error on which days to display.
+- Re-enable going to the Forecast.io page on all items.
 
 ## [1.0.5] - 2016-07-20
 ### Changed
@@ -17,7 +21,7 @@
 
 ## [1.0.4] - 2016-04-17
 ### Fixed
-- Update dependencies
+- Update dependencies.
 
 ## [1.0.3] - 2016-04-05
 ### Added
@@ -32,7 +36,7 @@
 
 ## [1.0.0] - 2015-11-01
 ### Changed
-- Use [Alphred](https://github.com/kejadlen/alphred)
+- Use [Alphred](https://github.com/kejadlen/alphred).
 
 ## [0.0.8] - 2015-05-31
 ### Added
