@@ -1,4 +1,4 @@
-## Unreleased
+## [1.0.8] - 2016-08-04
 ### Added
 - Selecting a daily item now goes to the day on Forecast.io.
 
