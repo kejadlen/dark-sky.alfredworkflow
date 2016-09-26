@@ -15,7 +15,7 @@ Forecaster = Struct.new(:api_key) do
   def forecast(location)
     lat, long = location.lat, location.long
     units = ENV['FORECAST_UNITS'].to_s
-    url = "https://api.forecast.io/forecast/#{api_key}/#{lat},#{long}?units=#{units}"
+    url = "https://api.darksky.net/forecast/#{api_key}/#{lat},#{long}?units=#{units}"
     response = JSON.load(open(url))
   end
 end
