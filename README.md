@@ -2,7 +2,7 @@
 
 ![screenshot][screenshot]
 
-[screenshot]: http://i.imgur.com/gQKF32S.png
+[screenshot]: http://i.imgur.com/lbA9fPW.png
 
 # Requirements
 
