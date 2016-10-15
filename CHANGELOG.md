@@ -1,4 +1,4 @@
-## Unreleased
+## [2.0.0] - 2016-10-15
 ### Added
 - `darksky` keyword trigger
 
