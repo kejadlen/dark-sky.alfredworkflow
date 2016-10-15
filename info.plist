@@ -3,12 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>com.kejadlen.forecast</string>
+	<string>com.kejadlen.darksky</string>
 	<key>category</key>
 	<string>Internet</string>
 	<key>connections</key>
 	<dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>3331E3E1-4FAE-41FD-8133-DAB62076AB91</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -42,7 +55,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Forecast</string>
+	<string>Dark Sky</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -53,7 +66,7 @@
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
-				<string>open "https://forecast.io/#/f/{query}"</string>
+				<string>open "https://darksky.net/{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -78,7 +91,7 @@
 				<key>escaping</key>
 				<integer>127</integer>
 				<key>keyword</key>
-				<string>forecast</string>
+				<string>darksky</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -90,7 +103,7 @@
 				<key>runningsubtext</key>
 				<string>Retriving location/weather...</string>
 				<key>script</key>
-				<string>ruby forecast.rb {query}</string>
+				<string>ruby dark-sky.rb {query}</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -98,7 +111,7 @@
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Forecast</string>
+				<string>Dark Sky</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -130,6 +143,49 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>forecast</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Retriving location/weather...</string>
+				<key>script</key>
+				<string>ruby dark-sky.rb {query}</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Dark Sky</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3331E3E1-4FAE-41FD-8133-DAB62076AB91</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -141,6 +197,13 @@
 			<integer>190</integer>
 			<key>ypos</key>
 			<integer>140</integer>
+		</dict>
+		<key>3331E3E1-4FAE-41FD-8133-DAB62076AB91</key>
+		<dict>
+			<key>xpos</key>
+			<integer>190</integer>
+			<key>ypos</key>
+			<integer>250</integer>
 		</dict>
 		<key>E4BEE57E-E97D-4B2B-ADC1-988BF006A8CC</key>
 		<dict>
@@ -159,19 +222,19 @@
 	</dict>
 	<key>variables</key>
 	<dict>
-		<key>FORECAST_API_KEY</key>
+		<key>DARK_SKY_API_KEY</key>
 		<string></string>
 		<key>GOOGLE_API_KEY</key>
 		<string></string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
-		<string>FORECAST_API_KEY</string>
+		<string>DARK_SKY_API_KEY</string>
 		<string>GOOGLE_API_KEY</string>
 	</array>
 	<key>version</key>
 	<string></string>
 	<key>webaddress</key>
-	<string>http://github.com/kejadlen/forecast.alfredworkflow</string>
+	<string>http://github.com/kejadlen/dark-sky.alfredworkflow</string>
 </dict>
 </plist>

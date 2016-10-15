@@ -65,7 +65,8 @@ items << Alphred::Item.new(
   arg: arg,
   valid: true,
   title: location.name,
-  icon: 'icons/forecast.png',
+  subtitle: '• Powered by Dark Sky',
+  icon: 'icons/dark_sky.png',
 )
 
 currently = forecast['currently']

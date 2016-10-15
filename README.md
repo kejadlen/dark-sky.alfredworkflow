@@ -1,4 +1,4 @@
-# Forecast Workflow for Alfred
+# Dark Sky Workflow for Alfred
 
 ![screenshot][screenshot]
 
@@ -14,11 +14,11 @@
 
 Download and install the [workflow][download].
 
-[download]: https://github.com/kejadlen/forecast.alfredworkflow/releases/download/v1.0.3/Forecast.alfredworkflow
+[download]: https://github.com/kejadlen/dark-sky.alfredworkflow/releases/download/v2.0.0/DarkSky.alfredworkflow
 
 These environment variables can be [configured in Alfred][env-vars]:
 
-- `FORECAST_API_KEY`: Get an API key [here][forecast-api-key].
+- `DARK_SKY_API_KEY`: Get an API key [here][dark-sky-api-key].
 - `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding
   queries. *This can be omitted if you only want the forecast for the current
   location*.)
@@ -28,18 +28,18 @@ These environment variables can be [configured in Alfred][env-vars]:
 - `DEFAULT_LOCATION`: Used for displaying the location name when using `DEFAULT_LAT_LONG`.
 
 [env-vars]: https://www.alfredapp.com/help/workflows/advanced/variables/
-[forecast-api-key]: https://developer.forecast.io/register
+[dark-sky-api-key]: https://darksky.net/dev/register
 [google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
 
 # TODO
 
 - Handle errors gracefully
 - Caching? (Probably unnecessary...)
-- Use `Accept-Encoding: gzip` for Forecast calls
+- Use `Accept-Encoding: gzip` for Dark Sky API calls
 
 # Attributions
 
 - [Climacons](http://adamwhitcroft.com/climacons/)
-- [Forecast API](https://developer.forecast.io/docs/v2)
+- [Dark Sky API](https://darksky.net/dev/docs)
 - [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/)
 - [ipinfo.io](http://ipinfo.io/)

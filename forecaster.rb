@@ -9,7 +9,7 @@ Forecaster = Struct.new(:api_key) do
   def self.forecaster
     return @forecaster if defined?(@forecaster)
 
-    @forecaster = self.new(ENV['FORECAST_API_KEY'].to_s)
+    @forecaster = self.new(ENV['DARK_SKY_API_KEY'].to_s)
   end
 
   def forecast(location)
