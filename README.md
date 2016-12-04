@@ -32,12 +32,6 @@ These environment variables can be [configured in Alfred][env-vars]:
 [dark-sky-api-key]: https://darksky.net/dev/register
 [google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
 
-# TODO
-
-- Handle errors gracefully
-- Caching? (Probably unnecessary...)
-- Use `Accept-Encoding: gzip` for Dark Sky API calls
-
 # Attributions
 
 - [Climacons](http://adamwhitcroft.com/climacons/)
