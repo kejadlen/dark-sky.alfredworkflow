@@ -188,7 +188,17 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>These environment variables can be configured:
+
+- `DARK_SKY_API_KEY`: Get an API key [here][dark-sky-api-key].
+- `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding queries. *This can be omitted if you only want the forecast for the current location*.)
+- `FORECAST_UNITS`: Defaults to `auto`, which sets the units based on the location. Use `si` for Celsius and `us` for Fahrenheit.
+- `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex: `47.7396,-122.3426` for Seattle.
+- `DEFAULT_LOCATION`: Used for displaying the location name when using `DEFAULT_LAT_LONG`.
+- `LIGHT_ICONS`: `true` gives white icons, `false` gives black icons.
+
+[dark-sky-api-key]: https://darksky.net/dev/register
+[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key</string>
 	<key>uidata</key>
 	<dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
