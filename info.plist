@@ -208,8 +208,8 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>readonly local_file='info.plist' # Local file to compare to remote_file
-readonly remote_file='https://raw.githubusercontent.com/kejadlen/dark-sky.alfredworkflow/master/info.plist' # Remote file (URL) to compare to local_file
+				<string>readonly local_file='version.rb' # Local file to compare to remote_file
+readonly remote_file='https://raw.githubusercontent.com/kejadlen/dark-sky.alfredworkflow/master/version.rb' # Remote file (URL) to compare to local_file
 readonly workflow_url='https://github.com/kejadlen/dark-sky.alfredworkflow/releases' # URL to directly download workflow or workflow download page
 readonly workflow_type='page' # Either 'workflow' if workflow_url points to direct download, or 'page' if it points to download page
 readonly frequency_check='15' # Days between update checks
@@ -309,8 +309,8 @@ fi #find</string>
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>readonly local_file='info.plist' # Local file to compare to remote_file
-readonly remote_file='https://raw.githubusercontent.com/kejadlen/dark-sky.alfredworkflow/master/info.plist' # Remote file (URL) to compare to local_file
+				<string>readonly local_file='version.rb' # Local file to compare to remote_file
+readonly remote_file='https://raw.githubusercontent.com/kejadlen/dark-sky.alfredworkflow/master/version.rb' # Remote file (URL) to compare to local_file
 readonly workflow_url='https://github.com/kejadlen/dark-sky.alfredworkflow/releases' # URL to directly download workflow or workflow download page
 readonly workflow_type='page' # Either 'workflow' if workflow_url points to direct download, or 'page' if it points to download page
 readonly frequency_check='15' # Days between update checks
