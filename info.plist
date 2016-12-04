@@ -224,6 +224,12 @@
 	<dict>
 		<key>DARK_SKY_API_KEY</key>
 		<string></string>
+		<key>DEFAULT_LAT_LONG</key>
+		<string></string>
+		<key>DEFAULT_LOCATION</key>
+		<string></string>
+		<key>FORECAST_UNITS</key>
+		<string>auto</string>
 		<key>GOOGLE_API_KEY</key>
 		<string></string>
 		<key>LIGHT_ICONS</key>
@@ -232,6 +238,8 @@
 	<key>variablesdontexport</key>
 	<array>
 		<string>DARK_SKY_API_KEY</string>
+		<string>DEFAULT_LOCATION</string>
+		<string>DEFAULT_LAT_LONG</string>
 		<string>GOOGLE_API_KEY</string>
 	</array>
 	<key>version</key>
