@@ -1,3 +1,19 @@
+## Unreleased
+Many thanks to [vitorgalvao](https://github.com/vitorgalvao) for this release!
+
+### Added
+- Support for using a dark theme in Alfred
+- Better Alfred support (environment variables, description, and version)
+- [OneUpdater](oneupdater) support
+
+[oneupdater]: http://www.alfredforum.com/topic/9224-oneupdater-%E2%80%94-update-workflows-with-a-single-node/#comment-45902
+
+### Changed
+- Workflow doesn't need to be scrolled to view all the nodes
+
+### Removed
+- Unused weather icons
+
 ## [2.0.0] - 2016-10-15
 ### Added
 - `darksky` keyword trigger
