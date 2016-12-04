@@ -7,18 +7,33 @@ require_relative 'forecaster'
 require_relative 'location'
 require_relative 'spark'
 
-ICONS = {
-  'clear-day'           => 'Sun',
-  'clear-night'         => 'Moon',
-  'rain'                => 'Cloud-Rain',
-  'snow'                => 'Cloud-Snow',
-  'sleet'               => 'Cloud-Snow-Alt',
-  'wind'                => 'Wind',
-  'fog'                 => 'Cloud-Fog',
-  'cloudy'              => 'Cloud',
-  'partly-cloudy-day'   => 'Cloud-Sun',
-  'partly-cloudy-night' => 'Cloud-Moon',
-}
+if ENV['LIGHT_ICONS'] == 'true' # Alfred's Workflow Environment Variables are strings, not booleans
+  ICONS = {
+    'clear-day'           => 'Light-Sun',
+    'clear-night'         => 'Light-Moon',
+    'rain'                => 'Light-Cloud-Rain',
+    'snow'                => 'Light-Cloud-Snow',
+    'sleet'               => 'Light-Cloud-Snow-Alt',
+    'wind'                => 'Light-Wind',
+    'fog'                 => 'Light-Cloud-Fog',
+    'cloudy'              => 'Light-Cloud',
+    'partly-cloudy-day'   => 'Light-Cloud-Sun',
+    'partly-cloudy-night' => 'Light-Cloud-Moon',
+  }
+else
+  ICONS = {
+    'clear-day'           => 'Dark-Sun',
+    'clear-night'         => 'Dark-Moon',
+    'rain'                => 'Dark-Cloud-Rain',
+    'snow'                => 'Dark-Cloud-Snow',
+    'sleet'               => 'Dark-Cloud-Snow-Alt',
+    'wind'                => 'Dark-Wind',
+    'fog'                 => 'Dark-Cloud-Fog',
+    'cloudy'              => 'Dark-Cloud',
+    'partly-cloudy-day'   => 'Dark-Cloud-Sun',
+    'partly-cloudy-night' => 'Dark-Cloud-Moon',
+  }
+end
 
 Precipitation = Struct.new(:intensity, :probability) do
   def self.from_forecast(forecast)
