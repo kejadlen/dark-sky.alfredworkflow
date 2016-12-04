@@ -1,4 +1,5 @@
-## Unreleased
+## [2.1.0] - 2016-12-04
+
 Many thanks to [vitorgalvao](https://github.com/vitorgalvao) for this release!
 
 ### Added
