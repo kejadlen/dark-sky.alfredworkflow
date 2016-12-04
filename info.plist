@@ -226,6 +226,8 @@
 		<string></string>
 		<key>GOOGLE_API_KEY</key>
 		<string></string>
+		<key>LIGHT_ICONS</key>
+		<string>false</string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
