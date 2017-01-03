@@ -465,13 +465,14 @@ fi #find</string>
 		<key>GOOGLE_API_KEY</key>
 		<string></string>
 		<key>LIGHT_ICONS</key>
-		<string>false</string>
+		<string></string>
 	</dict>
 	<key>variablesdontexport</key>
 	<array>
 		<string>DARK_SKY_API_KEY</string>
 		<string>DEFAULT_LOCATION</string>
 		<string>DEFAULT_LAT_LONG</string>
+		<string>LIGHT_ICONS</string>
 		<string>GOOGLE_API_KEY</string>
 	</array>
 	<key>version</key>
