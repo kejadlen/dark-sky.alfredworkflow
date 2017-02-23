@@ -1,3 +1,14 @@
+## [2.1.1] - 2017-02-23
+
+### Added
+
+- Do not export variable for light icons (it’s still there, just set by default
+  to an empty value instead of false, since it works the same).
+- Corrected the main workflow icon (it was not using the hybrid version, which
+  was the whole point; there was also a node that had a repeated icon).
+- Updated to latest OneUpdater which has some niceties concerned specifically
+  with workflows like this one, that require Workflow Environment Variables.
+
 ## [2.1.0] - 2016-12-04
 
 Many thanks to [vitorgalvao](https://github.com/vitorgalvao) for this release!
