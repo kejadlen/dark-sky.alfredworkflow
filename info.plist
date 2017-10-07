@@ -101,7 +101,7 @@
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Retriving location/weather...</string>
+				<string>Retrieving location/weather...</string>
 				<key>script</key>
 				<string>ruby dark-sky.rb {query}</string>
 				<key>scriptargtype</key>
@@ -163,7 +163,7 @@
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
-				<string>Retriving location/weather...</string>
+				<string>Retrieving location/weather...</string>
 				<key>script</key>
 				<string>ruby dark-sky.rb {query}</string>
 				<key>scriptargtype</key>
