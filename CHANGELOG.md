@@ -1,3 +1,8 @@
+## Unreleased
+
+### Fixed
+- Typo (Thanks, @jgarber623!)
+
 ## [2.1.1] - 2017-02-23
 
 ### Added
