@@ -1,4 +1,6 @@
-## Unreleased
+## [2.1.2] - 2017-10-11
+
+- Vendor 2.3 gems for High Sierra.
 
 ### Fixed
 - Typo (Thanks, @jgarber623!)

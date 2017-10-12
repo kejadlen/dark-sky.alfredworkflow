@@ -1,9 +1,13 @@
+PATH
+  remote: ../../../../src/github.com/kejadlen/alphred
+  specs:
+    alphred (2.0.2)
+      builder (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    alphred (2.0.1)
-      builder (~> 3.2)
-    builder (3.2.2)
+    builder (3.2.3)
     coderay (1.1.1)
     method_source (0.8.2)
     pry (0.10.4)
@@ -17,9 +21,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  alphred (~> 2.0)
+  alphred (~> 2.0)!
   pry
   rake
 
 BUNDLED WITH
-   1.11.2
+   1.15.4
