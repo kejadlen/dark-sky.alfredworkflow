@@ -8,12 +8,10 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 
+mod coordinate;
 mod errors;
 
-use std::result;
-
-use serde::Deserialize;
-
+use coordinate::Coordinate;
 use errors::*;
 
 quick_main!(run);
@@ -26,35 +24,10 @@ fn run() -> Result<()> {
     Ok(())
 }
 
-#[derive(Debug)]
-struct Coordinate {
-    lat: f64,
-    long: f64,
-}
-
 #[derive(Debug, Deserialize)]
 struct IPInfo {
-    #[serde(rename = "loc", deserialize_with = "coordinate_from_string")]
-    location: Coordinate,
+    #[serde(rename = "loc")]
+    coord: Coordinate,
     city: String,
     region: String,
-}
-
-fn coordinate_from_string<'de, D>(deserializer: D) -> result::Result<Coordinate, D::Error>
-where
-    D: ::serde::Deserializer<'de>,
-{
-    let s = String::deserialize(deserializer)?;
-    let mut split = s.split(',');
-    let lat = split.next().and_then(|lat| lat.parse().ok()).ok_or_else(
-        || {
-            ::serde::de::Error::custom("")
-        },
-    )?;
-    let long = split.next().and_then(|long| long.parse().ok()).ok_or_else(
-        || {
-            ::serde::de::Error::custom("")
-        },
-    )?;
-    Ok(Coordinate { lat, long })
 }
