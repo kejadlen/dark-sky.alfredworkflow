@@ -2,8 +2,8 @@ use serde::Deserialize;
 
 #[derive(Debug)]
 pub struct Coordinate {
-    lat: f64,
-    long: f64,
+    pub lat: f64,
+    pub long: f64,
 }
 
 impl<'de> Deserialize<'de> for Coordinate {

@@ -4,7 +4,7 @@ version = "3.0.0"
 authors = ["Alpha Chen <alpha.chen@gmail.com>"]
 
 [dependencies]
-alphred = { git = "https://github.com/kejadlen/alphred-rs.git" }
+alphred = { path = "../alphred-rs" }
 error-chain = "0.11"
 reqwest = "0.8"
 serde = "1.0"
