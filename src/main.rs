@@ -22,40 +22,29 @@ use coordinate::Coordinate;
 use forecast::Forecast;
 use errors::*;
 
-quick_main!(|| { DarkSky::new().run() });
+quick_main!(|| DarkSky::new().run());
 
 struct DarkSky {}
 
 impl DarkSky {
     fn new() -> Self {
-        Self{}
+        Self {}
     }
 
     fn run(&self) -> Result<()> {
         let mut items = Vec::new();
 
-        let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
-        let coord = ip_info.coord;
-        let lat = coord.lat;
-        let long = coord.long;
-        let arg = format!("{:.4},{:.4}", lat, long);
+        let location = self.location()?;
+        let arg = format!("{:.4},{:.4}", location.coord.lat, location.coord.long);
 
-        let api_key = env::var("DARK_SKY_API_KEY")?;
-        let url = format!(
-            "https://api.darksky.net/forecast/{}/{},{}",
-            api_key,
-            lat,
-            long
-        );
-        let forecast: Forecast = reqwest::get(&url)?.json()?;
-
-        let title = format!("{}, {}", ip_info.city, ip_info.region);
         let icon = Icon { path: "icons/dark_sky.png".into() };
-        let item = Item::new(title)
+        let item = Item::new(location.description)
             .subtitle("• Powered by Dark Sky")
             .arg(&arg)
             .icon(icon);
         items.push(item);
+
+        let forecast = self.forecast(location.coord)?;
 
         let title = forecast.currently.summary;
         let subtitle = vec![
@@ -80,6 +69,24 @@ impl DarkSky {
         Ok(())
     }
 
+    fn location(&self) -> Result<Location> {
+        let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
+        let description = format!("{}, {}", ip_info.city, ip_info.region);
+        let coord = ip_info.coord;
+        Ok(Location { description, coord })
+    }
+
+    fn forecast(&self, coord: Coordinate) -> Result<Forecast> {
+        let api_key = env::var("DARK_SKY_API_KEY")?;
+        let url = format!(
+            "https://api.darksky.net/forecast/{}/{},{}",
+            api_key,
+            coord.lat,
+            coord.long
+        );
+        Ok(reqwest::get(&url)?.json()?)
+    }
+
     fn translate_icon(icon: &forecast::Icon) -> Option<String> {
         match *icon {
             forecast::Icon::ClearDay => Some("Sun"),
@@ -95,6 +102,12 @@ impl DarkSky {
             forecast::Icon::Unknown(_) => None,
         }.map(String::from)
     }
+}
+
+#[derive(Debug)]
+struct Location {
+    description: String,
+    coord: Coordinate,
 }
 
 #[derive(Debug, Deserialize)]
