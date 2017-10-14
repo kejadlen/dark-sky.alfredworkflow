@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct Coordinate(pub f64, pub f64);
 
 impl<'de> Deserialize<'de> for Coordinate {

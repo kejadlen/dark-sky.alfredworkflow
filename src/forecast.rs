@@ -1,7 +1,7 @@
 use std::fmt;
 use serde::Deserialize;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub enum Icon {
     ClearDay,
     ClearNight,
@@ -41,27 +41,28 @@ impl<'de> Deserialize<'de> for Icon {
 #[derive(Debug, Deserialize)]
 pub struct Forecast {
     pub currently: Point,
+    pub minutely: Block,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Point {
     #[serde(rename = "temperature")]
-    pub temp: f64,
+    pub temp: Option<f64>,
     #[serde(rename = "apparentTemperature")]
-    pub apparent_temp: f64,
-    pub icon: Icon,
+    pub apparent_temp: Option<f64>,
+    pub icon: Option<Icon>,
     #[serde(rename = "precipIntensity")]
     precip_intensity: Option<f64>,
     #[serde(rename = "precipProbability")]
     precip_probability: Option<f64>,
-    pub summary: String,
+    pub summary: Option<String>,
 }
 
 impl Point {
     pub fn precipitation(&self) -> Option<Precipitation> {
         self.precip_intensity.and_then(|intensity| {
             if intensity == 0.0 {
-                return None
+                return None;
             }
 
             self.precip_probability.map(|probability| {
@@ -72,6 +73,13 @@ impl Point {
             })
         })
     }
+}
+
+#[derive(Debug, Deserialize)]
+pub struct Block {
+    data: Vec<Point>,
+    summary: Option<String>,
+    icon: Option<Icon>,
 }
 
 pub struct Precipitation {
