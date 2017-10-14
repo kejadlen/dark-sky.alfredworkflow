@@ -35,7 +35,8 @@ impl DarkSky {
         let mut items = Vec::new();
 
         let location = self.location()?;
-        let arg = format!("{:.4},{:.4}", location.coord.lat, location.coord.long);
+        let Coordinate(lat, long) = location.coord;
+        let arg = format!("{:.4},{:.4}", lat, long);
 
         let icon = Icon { path: "icons/dark_sky.png".into() };
         let item = Item::new(location.description)
@@ -78,11 +79,12 @@ impl DarkSky {
 
     fn forecast(&self, coord: Coordinate) -> Result<Forecast> {
         let api_key = env::var("DARK_SKY_API_KEY")?;
+        let Coordinate(lat, long) = coord;
         let url = format!(
             "https://api.darksky.net/forecast/{}/{},{}",
             api_key,
-            coord.lat,
-            coord.long
+            lat,
+            long
         );
         Ok(reqwest::get(&url)?.json()?)
     }

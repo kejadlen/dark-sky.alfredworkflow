@@ -1,10 +1,7 @@
 use serde::Deserialize;
 
 #[derive(Debug)]
-pub struct Coordinate {
-    pub lat: f64,
-    pub long: f64,
-}
+pub struct Coordinate(pub f64, pub f64);
 
 impl<'de> Deserialize<'de> for Coordinate {
     fn deserialize<D>(deserializer: D) -> Result<Coordinate, D::Error>
@@ -23,7 +20,7 @@ impl<'de> Deserialize<'de> for Coordinate {
                 ::serde::de::Error::custom("")
             },
         )?;
-        Ok(Coordinate { lat, long })
+        Ok(Coordinate(lat, long))
     }
 }
 
@@ -38,7 +35,7 @@ fn test_deserializing_coordinate() {
     let c: Result<Coordinate, _> = ::serde_json::from_str("\"123,\"");
     assert!(c.is_err());
 
-    let c: Coordinate = ::serde_json::from_str("\"123,-123\"").unwrap();
-    assert_eq!(c.lat, 123.0);
-    assert_eq!(c.long, -123.0);
+    let (lat, long) = ::serde_json::from_str("\"123,-123\"").unwrap();
+    assert_eq!(lat, 123.0);
+    assert_eq!(long, -123.0);
 }
