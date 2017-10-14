@@ -1,3 +1,4 @@
+#![feature(inclusive_range_syntax, range_contains)]
 #![recursion_limit = "1024"]
 
 extern crate alphred;
@@ -46,16 +47,20 @@ impl DarkSky {
 
         let forecast = self.forecast(location.coord)?;
 
-        let title = forecast.currently.summary;
-        let subtitle = vec![
-            format!("{}°", forecast.currently.temp.round()),
-            format!("Feels like {}°", forecast.currently.apparent_temp.round()),
+        let currently = forecast.currently;
+        let title = currently.summary.clone();
+        let mut subtitle = vec![
+            format!("{}°", currently.temp.round()),
+            format!("Feels like {}°", currently.apparent_temp.round()),
         ];
+        if let Some(precip) = currently.precipitation().map(|p| format!("{}", p)) {
+            subtitle.push(precip)
+        }
         let subtitle = subtitle.join(" · ");
         let mut item = Item::new(title);
         item = item.subtitle(&subtitle);
         item = item.arg(&arg);
-        if let Some(path) = Self::translate_icon(&forecast.currently.icon) {
+        if let Some(path) = Self::translate_icon(&currently.icon) {
             item = item.icon(format!("Dark-{}", path).as_str());
         }
         items.push(item);
