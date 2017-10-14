@@ -23,13 +23,16 @@ use coordinate::Coordinate;
 use forecast::{Forecast, Icon};
 use errors::*;
 
-quick_main!(|| DarkSky::new().run());
+quick_main!(|| DarkSky::new()?.run());
 
-struct DarkSky {}
+struct DarkSky {
+    dark_sky_api_key: String,
+}
 
 impl DarkSky {
-    fn new() -> Self {
-        Self {}
+    fn new() -> Result<Self> {
+        let dark_sky_api_key = env::var("DARK_SKY_API_KEY")?;
+        Ok(Self { dark_sky_api_key })
     }
 
     fn run(&self) -> Result<()> {
@@ -81,11 +84,10 @@ impl DarkSky {
     }
 
     fn forecast(&self, coord: Coordinate) -> Result<Forecast> {
-        let api_key = env::var("DARK_SKY_API_KEY")?;
         let Coordinate(lat, long) = coord;
         let url = format!(
             "https://api.darksky.net/forecast/{}/{},{}",
-            api_key,
+            self.dark_sky_api_key,
             lat,
             long
         );
