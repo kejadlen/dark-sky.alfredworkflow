@@ -40,8 +40,8 @@ impl<'de> Deserialize<'de> for Icon {
 
 #[derive(Debug, Deserialize)]
 pub struct Forecast {
-    pub currently: Point,
-    pub minutely: Block,
+    pub currently: Option<Point>,
+    pub minutely: Option<Block>,
 }
 
 #[derive(Debug, Deserialize)]

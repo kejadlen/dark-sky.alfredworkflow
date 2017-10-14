@@ -59,7 +59,7 @@ impl DarkSky {
             .icon("icons/dark_sky.png");
         items.push(item);
 
-        if let Some(item) = self.currently(&forecast.currently) {
+        if let Some(item) = forecast.currently.and_then(|point| self.currently(&point)) {
             items.push(item);
         }
 
