@@ -16,10 +16,10 @@ mod errors;
 
 use std::env;
 
-use alphred::{Item, Icon};
+use alphred::Item;
 
 use coordinate::Coordinate;
-use forecast::Forecast;
+use forecast::{Forecast, Icon};
 use errors::*;
 
 quick_main!(|| DarkSky::new().run());
@@ -38,11 +38,10 @@ impl DarkSky {
         let Coordinate(lat, long) = location.coord;
         let arg = format!("{:.4},{:.4}", lat, long);
 
-        let icon = Icon { path: "icons/dark_sky.png".into() };
         let item = Item::new(location.description)
             .subtitle("• Powered by Dark Sky")
             .arg(&arg)
-            .icon(icon);
+            .icon("icons/dark_sky.png");
         items.push(item);
 
         let forecast = self.forecast(location.coord)?;
@@ -57,8 +56,7 @@ impl DarkSky {
         item = item.subtitle(&subtitle);
         item = item.arg(&arg);
         if let Some(path) = Self::translate_icon(&forecast.currently.icon) {
-            let path = format!("Dark-{}", path).into();
-            item = item.icon(Icon { path });
+            item = item.icon(format!("Dark-{}", path).as_str());
         }
         items.push(item);
 
@@ -91,17 +89,17 @@ impl DarkSky {
 
     fn translate_icon(icon: &forecast::Icon) -> Option<String> {
         match *icon {
-            forecast::Icon::ClearDay => Some("Sun"),
-            forecast::Icon::ClearNight => Some("Moon"),
-            forecast::Icon::Rain => Some("Cloud-Rain"),
-            forecast::Icon::Snow => Some("Cloud-Snow"),
-            forecast::Icon::Sleet => Some("Cloud-Snow-Alt"),
-            forecast::Icon::Wind => Some("Wind"),
-            forecast::Icon::Fog => Some("Cloud-Fog"),
-            forecast::Icon::Cloudy => Some("Cloud"),
-            forecast::Icon::PartlyCloudyDay => Some("Cloud-Sun"),
-            forecast::Icon::PartlyCloudyNight => Some("Cloud-Moon"),
-            forecast::Icon::Unknown(_) => None,
+            Icon::ClearDay => Some("Sun"),
+            Icon::ClearNight => Some("Moon"),
+            Icon::Rain => Some("Cloud-Rain"),
+            Icon::Snow => Some("Cloud-Snow"),
+            Icon::Sleet => Some("Cloud-Snow-Alt"),
+            Icon::Wind => Some("Wind"),
+            Icon::Fog => Some("Cloud-Fog"),
+            Icon::Cloudy => Some("Cloud"),
+            Icon::PartlyCloudyDay => Some("Cloud-Sun"),
+            Icon::PartlyCloudyNight => Some("Cloud-Moon"),
+            Icon::Unknown(_) => None,
         }.map(String::from)
     }
 }
