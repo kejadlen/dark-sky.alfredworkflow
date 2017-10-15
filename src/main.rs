@@ -1,4 +1,4 @@
-#![feature(inclusive_range_syntax, range_contains)]
+#![feature(inclusive_range_syntax, iterator_step_by, range_contains)]
 #![recursion_limit = "1024"]
 
 extern crate alphred;
@@ -14,8 +14,10 @@ extern crate serde_json;
 mod coordinate;
 mod forecast;
 mod errors;
+mod sparkline;
 
 use std::env;
+use std::f64;
 
 use alphred::Item;
 
@@ -63,9 +65,11 @@ impl DarkSky {
             items.push(item);
         }
 
-        let json = json!({
-            "items": items
-        });
+        if let Some(item) = forecast.minutely.and_then(|block| self.minutely(&block)) {
+            items.push(item);
+        }
+
+        let json = json!({ "items": items });
         println!("{}", json);
 
         Ok(())
@@ -88,20 +92,20 @@ impl DarkSky {
     }
 
     fn currently(&self, point: &forecast::Point) -> Option<Item> {
-        if let (Some(title), Some(temp), Some(apparent_temp), Some(icon)) =
-            (
-                point.summary.clone(),
-                point.temp,
-                point.apparent_temp,
-                point.icon.clone(),
-            )
-        {
+        if let (Some(title), Some(temp), Some(apparent_temp), Some(icon)) = (
+            point.summary.clone(),
+            point.temp,
+            point.apparent_temp,
+            point.icon.clone(),
+        ) {
             let mut subtitle = vec![
                 format!("{}°", temp.round()),
                 format!("Feels like {}°", apparent_temp.round()),
             ];
-            if let Some(precip) = point.precipitation().map(|p| format!("{}", p)) {
-                subtitle.push(precip)
+            if let Some(precip) = point.precipitation() {
+                if precip.intensity > 0. {
+                    subtitle.push(format!("{}", precip));
+                }
             }
             let subtitle = subtitle.join(" · ");
 
@@ -117,7 +121,30 @@ impl DarkSky {
         }
     }
 
-    fn translate_icon(icon: &forecast::Icon) -> Option<String> {
+    fn minutely(&self, block: &forecast::Block) -> Option<Item> {
+        if let (Some(title), Some(icon)) = (block.summary.clone(), block.icon.clone()) {
+            let mut item = Item::new(title);
+
+            let mut subtitle = Vec::new();
+            let precips = block.precipitations();
+            let intensities: Vec<_> = precips.iter().map(|p| p.intensity).collect();
+            let (min, max) = Self::min_max(&intensities);
+            let sparkline = sparkline::Ascii::new(min, max, intensities.clone(), 4);
+            subtitle.push(format!("{:.3}\" {} {:.3}\"", min, sparkline, max));
+            let subtitle = subtitle.join(" · ");
+
+            item = item.subtitle(&subtitle);
+            item = item.arg(&self.arg());
+            if let Some(path) = Self::translate_icon(&icon) {
+                item = item.icon(format!("Dark-{}", path).as_str());
+            }
+            Some(item)
+        } else {
+            None
+        }
+    }
+
+    fn translate_icon(icon: &Icon) -> Option<String> {
         match *icon {
             Icon::ClearDay => Some("Sun"),
             Icon::ClearNight => Some("Moon"),
@@ -132,6 +159,12 @@ impl DarkSky {
             Icon::Unknown(_) => None,
         }.map(String::from)
     }
+
+    pub fn min_max(v: &Vec<f64>) -> (f64, f64) {
+        let min = v.iter().cloned().fold(f64::INFINITY, f64::min);
+        let max = v.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
+        (min, max)
+    }
 }
 
 #[derive(Debug)]
@@ -142,8 +175,7 @@ struct Location {
 
 #[derive(Debug, Deserialize)]
 struct IPInfo {
-    #[serde(rename = "loc")]
-    coord: Coordinate,
+    #[serde(rename = "loc")] coord: Coordinate,
     city: String,
     region: String,
 }

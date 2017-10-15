@@ -46,25 +46,17 @@ pub struct Forecast {
 
 #[derive(Debug, Deserialize)]
 pub struct Point {
-    #[serde(rename = "temperature")]
-    pub temp: Option<f64>,
-    #[serde(rename = "apparentTemperature")]
-    pub apparent_temp: Option<f64>,
+    #[serde(rename = "temperature")] pub temp: Option<f64>,
+    #[serde(rename = "apparentTemperature")] pub apparent_temp: Option<f64>,
     pub icon: Option<Icon>,
-    #[serde(rename = "precipIntensity")]
-    precip_intensity: Option<f64>,
-    #[serde(rename = "precipProbability")]
-    precip_probability: Option<f64>,
+    #[serde(rename = "precipIntensity")] precip_intensity: Option<f64>,
+    #[serde(rename = "precipProbability")] precip_probability: Option<f64>,
     pub summary: Option<String>,
 }
 
 impl Point {
     pub fn precipitation(&self) -> Option<Precipitation> {
         self.precip_intensity.and_then(|intensity| {
-            if intensity == 0.0 {
-                return None;
-            }
-
             self.precip_probability.map(|probability| {
                 Precipitation {
                     intensity,
@@ -78,13 +70,20 @@ impl Point {
 #[derive(Debug, Deserialize)]
 pub struct Block {
     data: Vec<Point>,
-    summary: Option<String>,
-    icon: Option<Icon>,
+    pub summary: Option<String>,
+    pub icon: Option<Icon>,
+}
+
+impl Block {
+    // This isn't quite right since I'm just dropping precipitation values that aren't there...
+    pub fn precipitations(&self) -> Vec<Precipitation> {
+        self.data.iter().flat_map(|x| x.precipitation()).collect()
+    }
 }
 
 pub struct Precipitation {
-    intensity: f64,
-    probability: f64,
+    pub intensity: f64,
+    pub probability: f64,
 }
 
 impl Precipitation {
