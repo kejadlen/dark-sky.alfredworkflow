@@ -38,7 +38,26 @@ mod precipitation {
     }
 
     impl Ord for Intensity {
-        fn cmp(&self, other: &Intensity) -> Ordering {
+        fn cmp(&self, other: &Self) -> Ordering {
+            self.partial_cmp(other).unwrap()
+        }
+    }
+
+    impl Eq for Probability {}
+    impl PartialEq for Probability {
+        fn eq(&self, other: &Self) -> bool {
+            self.0 == other.0
+        }
+    }
+
+    impl PartialOrd for Probability {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            self.0.partial_cmp(&other.0)
+        }
+    }
+
+    impl Ord for Probability {
+        fn cmp(&self, other: &Self) -> Ordering {
             self.partial_cmp(other).unwrap()
         }
     }
@@ -55,7 +74,7 @@ mod precipitation {
     }
 
     #[derive(Clone, Debug, Deserialize)]
-    pub struct Probability(f64);
+    pub struct Probability(pub f64);
 
     impl fmt::Display for Probability {
         fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

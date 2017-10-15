@@ -17,7 +17,6 @@ mod errors;
 mod sparkline;
 
 use std::env;
-use std::f64;
 
 use alphred::Item;
 
@@ -141,7 +140,18 @@ impl DarkSky {
                     intensities.clone().iter().map(|x| x.0).collect(),
                     4,
                 );
-                subtitle.push(format!("{:.3}\" {} {:.3}\"", min, sparkline, max));
+                subtitle.push(format!("{} {} {}", min, sparkline, max));
+            }
+            let probabilities = block.precip_probabilities();
+            if let (Some(min), Some(max)) = (probabilities.iter().min(), probabilities.iter().max())
+            {
+                let sparkline = sparkline::Ascii::new(
+                    min.0,
+                    1.,
+                    probabilities.clone().iter().map(|x| x.0).collect(),
+                    5,
+                );
+                subtitle.push(format!("{} {} {}", min, sparkline, max));
             }
             let subtitle = subtitle.join(" · ");
 
