@@ -102,9 +102,16 @@ impl DarkSky {
                 format!("{}°", temp.round()),
                 format!("Feels like {}°", apparent_temp.round()),
             ];
-            if let Some(precip) = point.precipitation() {
-                if precip.intensity > 0. {
-                    subtitle.push(format!("{}", precip));
+            if let (Some(intensity), Some(probability)) = (
+                point.precip_intensity.clone(),
+                point.precip_probability.clone(),
+            ) {
+                if intensity.0 > 0. {
+                    subtitle.push(format!(
+                        "{} chance of {} rain.",
+                        probability,
+                        intensity.humanized()
+                    ));
                 }
             }
             let subtitle = subtitle.join(" · ");
@@ -126,11 +133,16 @@ impl DarkSky {
             let mut item = Item::new(title);
 
             let mut subtitle = Vec::new();
-            let precips = block.precipitations();
-            let intensities: Vec<_> = precips.iter().map(|p| p.intensity).collect();
-            let (min, max) = Self::min_max(&intensities);
-            let sparkline = sparkline::Ascii::new(min, max, intensities.clone(), 4);
-            subtitle.push(format!("{:.3}\" {} {:.3}\"", min, sparkline, max));
+            let intensities = block.precip_intensities();
+            if let (Some(min), Some(max)) = (intensities.iter().min(), intensities.iter().max()) {
+                let sparkline = sparkline::Ascii::new(
+                    min.0,
+                    max.0,
+                    intensities.clone().iter().map(|x| x.0).collect(),
+                    4,
+                );
+                subtitle.push(format!("{:.3}\" {} {:.3}\"", min, sparkline, max));
+            }
             let subtitle = subtitle.join(" · ");
 
             item = item.subtitle(&subtitle);
@@ -158,12 +170,6 @@ impl DarkSky {
             Icon::PartlyCloudyNight => Some("Cloud-Moon"),
             Icon::Unknown(_) => None,
         }.map(String::from)
-    }
-
-    pub fn min_max(v: &Vec<f64>) -> (f64, f64) {
-        let min = v.iter().cloned().fold(f64::INFINITY, f64::min);
-        let max = v.iter().cloned().fold(f64::NEG_INFINITY, f64::max);
-        (min, max)
     }
 }
 
