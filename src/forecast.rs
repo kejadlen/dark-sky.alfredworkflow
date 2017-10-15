@@ -1,6 +1,18 @@
+use std::fmt;
+
+use chrono::prelude::*;
 use serde::Deserialize;
 
 use precipitation::{Intensity, Probability};
+
+#[derive(Clone, Debug, Deserialize)]
+pub struct Temperature(f64);
+
+impl fmt::Display for Temperature {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}°", self.0.round())
+    }
+}
 
 #[derive(Clone, Debug)]
 pub enum Icon {
@@ -43,23 +55,50 @@ impl<'de> Deserialize<'de> for Icon {
 pub struct Forecast {
     pub currently: Option<Point>,
     pub minutely: Option<Block>,
+    pub daily: Option<Block>,
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Point {
     #[serde(rename = "temperature")] pub temp: Option<f64>,
-    #[serde(rename = "apparentTemperature")] pub apparent_temp: Option<f64>,
+    pub apparent_temperature: Option<Temperature>,
+    pub apparent_temperature_min: Option<Temperature>,
+    pub apparent_temperature_max: Option<Temperature>,
     pub icon: Option<Icon>,
-    #[serde(rename = "precipIntensity")] pub precip_intensity: Option<Intensity>,
-    #[serde(rename = "precipProbability")]
-    pub precip_probability:
-        Option<Probability>,
+    pub precip_intensity: Option<Intensity>,
+    pub precip_probability: Option<Probability>,
     pub summary: Option<String>,
+    #[serde(deserialize_with = "deserialize_timestamp")] pub time: DateTime<Local>,
+}
+
+fn deserialize_timestamp<'de, D>(deserializer: D) -> Result<DateTime<Local>, D::Error>
+where
+    D: ::serde::Deserializer<'de>,
+{
+    let unix_time = i64::deserialize(deserializer)?;
+    Ok(Local.timestamp(unix_time, 0))
+}
+
+impl Point {
+    pub fn human_precipitation(&self) -> Option<String> {
+        match (
+            self.precip_intensity.clone(),
+            self.precip_probability.clone(),
+        ) {
+            (Some(ref intensity), Some(ref probability)) if probability.0 > 0. => Some(format!(
+                "{} chance of {} rain.",
+                probability,
+                intensity.humanized()
+            )),
+            _ => None,
+        }
+    }
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Block {
-    data: Vec<Point>,
+    pub data: Vec<Point>,
     pub summary: Option<String>,
     pub icon: Option<Icon>,
 }

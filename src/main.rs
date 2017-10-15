@@ -2,6 +2,7 @@
 #![recursion_limit = "1024"]
 
 extern crate alphred;
+extern crate chrono;
 #[macro_use]
 extern crate error_chain;
 extern crate reqwest;
@@ -20,6 +21,7 @@ mod sparkline;
 use std::env;
 
 use alphred::Item;
+use chrono::prelude::*;
 
 use coordinate::Coordinate;
 use forecast::{Forecast, Icon};
@@ -69,6 +71,15 @@ impl DarkSky {
             items.push(item);
         }
 
+        if let Some(daily) = forecast.daily {
+            daily
+                .data
+                .iter()
+                .take(5)
+                .flat_map(|point| self.daily(&point))
+                .for_each(|x| items.push(x));
+        }
+
         let json = json!({ "items": items });
         println!("{}", json);
 
@@ -95,24 +106,15 @@ impl DarkSky {
         if let (Some(title), Some(temp), Some(apparent_temp), Some(icon)) = (
             point.summary.clone(),
             point.temp,
-            point.apparent_temp,
+            point.apparent_temperature.clone(),
             point.icon.clone(),
         ) {
             let mut subtitle = vec![
                 format!("{}°", temp.round()),
-                format!("Feels like {}°", apparent_temp.round()),
+                format!("Feels like {}", apparent_temp),
             ];
-            if let (Some(intensity), Some(probability)) = (
-                point.precip_intensity.clone(),
-                point.precip_probability.clone(),
-            ) {
-                if intensity.0 > 0. {
-                    subtitle.push(format!(
-                        "{} chance of {} rain.",
-                        probability,
-                        intensity.humanized()
-                    ));
-                }
+            if let Some(human_precip) = point.human_precipitation() {
+                subtitle.push(human_precip);
             }
             let subtitle = subtitle.join(" · ");
 
@@ -158,6 +160,33 @@ impl DarkSky {
 
             item = item.subtitle(&subtitle);
             item = item.arg(&self.arg());
+            if let Some(path) = Self::translate_icon(&icon) {
+                item = item.icon(path.as_str());
+            }
+            Some(item)
+        } else {
+            None
+        }
+    }
+
+    fn daily(&self, point: &forecast::Point) -> Option<Item> {
+        if let (Some(ref summary), Some(ref min), Some(ref max), Some(ref icon)) = (
+            point.summary.clone(),
+            point.apparent_temperature_min.clone(),
+            point.apparent_temperature_max.clone(),
+            point.icon.clone(),
+        ) {
+            let weekday = if point.time.date() == Local::today() {
+                "Today".into()
+            } else {
+                point.time.format("%A").to_string()
+            };
+            let title = format!("{} - {}", weekday, summary);
+            let subtitle = format!("Low: {} · High: {}", min, max);
+            let arg = format!("{}/{}", self.arg(), point.time.timestamp());
+            let mut item = Item::new(title);
+            item = item.subtitle(&subtitle);
+            item = item.arg(&arg);
             if let Some(path) = Self::translate_icon(&icon) {
                 item = item.icon(path.as_str());
             }
