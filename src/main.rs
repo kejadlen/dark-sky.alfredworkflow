@@ -119,7 +119,7 @@ impl DarkSky {
             item = item.subtitle(&subtitle);
             item = item.arg(&self.arg());
             if let Some(path) = Self::translate_icon(&icon) {
-                item = item.icon(format!("Dark-{}", path).as_str());
+                item = item.icon(path.as_str());
             }
             Some(item)
         } else {
@@ -158,7 +158,7 @@ impl DarkSky {
             item = item.subtitle(&subtitle);
             item = item.arg(&self.arg());
             if let Some(path) = Self::translate_icon(&icon) {
-                item = item.icon(format!("Dark-{}", path).as_str());
+                item = item.icon(path.as_str());
             }
             Some(item)
         } else {
@@ -179,7 +179,7 @@ impl DarkSky {
             Icon::PartlyCloudyDay => Some("Cloud-Sun"),
             Icon::PartlyCloudyNight => Some("Cloud-Moon"),
             Icon::Unknown(_) => None,
-        }.map(String::from)
+        }.map(|x| format!("Dark-{}", x))
     }
 }
 
