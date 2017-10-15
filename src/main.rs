@@ -12,8 +12,9 @@ extern crate serde_derive;
 extern crate serde_json;
 
 mod coordinate;
-mod forecast;
 mod errors;
+mod forecast;
+mod precipitation;
 mod sparkline;
 
 use std::env;
