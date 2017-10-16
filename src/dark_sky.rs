@@ -16,8 +16,9 @@ pub struct Location {
 
 pub struct DarkSky {
     pub dark_sky_api_key: String,
-    pub theme: Theme,
     pub location: Location,
+    pub theme: Theme,
+    pub units: forecast::Units,
 }
 
 impl DarkSky {
@@ -57,11 +58,19 @@ impl DarkSky {
 
     fn forecast(&self, coord: Coordinate) -> Result<forecast::Forecast> {
         let Coordinate(lat, long) = coord;
+        let units = match self.units {
+            forecast::Units::Auto => "auto",
+            forecast::Units::Ca => "ca",
+            forecast::Units::Uk2 => "uk2",
+            forecast::Units::Us => "us",
+            forecast::Units::Si => "si",
+        };
         let url = format!(
-            "https://api.darksky.net/forecast/{}/{},{}",
+            "https://api.darksky.net/forecast/{}/{},{}?units={}",
             self.dark_sky_api_key,
             lat,
-            long
+            long,
+            units,
         );
         Ok(reqwest::get(&url)?.json()?)
     }

@@ -1,4 +1,4 @@
-#![feature(inclusive_range_syntax, iterator_step_by, range_contains)]
+#![feature(inclusive_range_syntax, iterator_step_by, range_contains, try_from)]
 #![recursion_limit = "1024"]
 
 extern crate alphred;
@@ -29,17 +29,28 @@ use theme::Theme;
 
 quick_main!(|| {
     let dark_sky_api_key = env::var("DARK_SKY_API_KEY")?;
+    let location = location()?;
     let theme = if env::var("LIGHT_ICONS") == Ok("true".into()) {
         Theme::Light
     } else {
         Theme::Dark
     };
-    let location = location()?;
+    let units = env::var("FORECAST_UNITS").map(|units|
+        match units.as_str() {
+            "auto" => forecast::Units::Auto,
+            "ca" => forecast::Units::Ca,
+            "uk2" => forecast::Units::Uk2,
+            "us" => forecast::Units::Us,
+            "si" => forecast::Units::Si,
+            _ => forecast::Units::Auto,
+        }
+    ).unwrap_or_else(|_| forecast::Units::Auto);
 
-    let dark_sky = DarkSky{
+    let dark_sky = DarkSky {
         dark_sky_api_key,
-        theme,
         location,
+        theme,
+        units,
     };
 
     dark_sky.run()

@@ -1,4 +1,5 @@
 use std::fmt;
+use std::result;
 
 use chrono::prelude::*;
 use serde::Deserialize;
@@ -12,6 +13,15 @@ impl fmt::Display for Temperature {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}°", self.0.round())
     }
+}
+
+#[derive(Debug)]
+pub enum Units {
+    Auto,
+    Ca,
+    Uk2,
+    Us,
+    Si,
 }
 
 #[derive(Clone, Debug)]
@@ -30,7 +40,7 @@ pub enum Icon {
 }
 
 impl<'de> Deserialize<'de> for Icon {
-    fn deserialize<D>(deserializer: D) -> Result<Icon, D::Error>
+    fn deserialize<D>(deserializer: D) -> result::Result<Icon, D::Error>
     where
         D: ::serde::Deserializer<'de>,
     {
@@ -72,7 +82,7 @@ pub struct Point {
     #[serde(deserialize_with = "deserialize_timestamp")] pub time: DateTime<Local>,
 }
 
-fn deserialize_timestamp<'de, D>(deserializer: D) -> Result<DateTime<Local>, D::Error>
+fn deserialize_timestamp<'de, D>(deserializer: D) -> result::Result<DateTime<Local>, D::Error>
 where
     D: ::serde::Deserializer<'de>,
 {
