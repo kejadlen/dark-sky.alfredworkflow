@@ -18,19 +18,27 @@ mod errors;
 mod forecast;
 mod precipitation;
 mod sparkline;
+mod theme;
 
 use std::env;
 
 use coordinate::Coordinate;
 use dark_sky::{DarkSky, Location};
 use errors::*;
+use theme::Theme;
 
 quick_main!(|| {
     let dark_sky_api_key = env::var("DARK_SKY_API_KEY")?;
+    let theme = if env::var("LIGHT_ICONS") == Ok("true".into()) {
+        Theme::Light
+    } else {
+        Theme::Dark
+    };
     let location = location()?;
 
     let dark_sky = DarkSky{
         dark_sky_api_key,
+        theme,
         location,
     };
 

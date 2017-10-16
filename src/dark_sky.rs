@@ -4,8 +4,9 @@ use reqwest;
 
 use coordinate::Coordinate;
 use errors::*;
-use forecast::{self, Forecast, Icon};
+use forecast;
 use sparkline;
+use theme::Theme;
 
 #[derive(Debug)]
 pub struct Location {
@@ -15,6 +16,7 @@ pub struct Location {
 
 pub struct DarkSky {
     pub dark_sky_api_key: String,
+    pub theme: Theme,
     pub location: Location,
 }
 
@@ -43,7 +45,7 @@ impl DarkSky {
                 .data
                 .iter()
                 .take(5)
-                .flat_map(|point| self.daily(&point))
+                .flat_map(|point| self.daily(point))
                 .for_each(|x| items.push(x));
         }
 
@@ -53,7 +55,7 @@ impl DarkSky {
         Ok(())
     }
 
-    fn forecast(&self, coord: Coordinate) -> Result<Forecast> {
+    fn forecast(&self, coord: Coordinate) -> Result<forecast::Forecast> {
         let Coordinate(lat, long) = coord;
         let url = format!(
             "https://api.darksky.net/forecast/{}/{},{}",
@@ -88,8 +90,8 @@ impl DarkSky {
             let mut item = Item::new(title);
             item = item.subtitle(&subtitle);
             item = item.arg(&self.arg());
-            if let Some(path) = Self::translate_icon(&icon) {
-                item = item.icon(path.as_str());
+            if let Some(path) = self.theme.icon_path(&icon) {
+                item = item.icon(path.as_path());
             }
             Some(item)
         } else {
@@ -127,8 +129,8 @@ impl DarkSky {
 
             item = item.subtitle(&subtitle);
             item = item.arg(&self.arg());
-            if let Some(path) = Self::translate_icon(&icon) {
-                item = item.icon(path.as_str());
+            if let Some(path) = self.theme.icon_path(&icon) {
+                item = item.icon(path.as_path());
             }
             Some(item)
         } else {
@@ -154,29 +156,13 @@ impl DarkSky {
             let mut item = Item::new(title);
             item = item.subtitle(&subtitle);
             item = item.arg(&arg);
-            if let Some(path) = Self::translate_icon(&icon) {
-                item = item.icon(path.as_str());
+            if let Some(path) = self.theme.icon_path(icon) {
+                item = item.icon(path.as_path());
             }
             Some(item)
         } else {
             None
         }
-    }
-
-    fn translate_icon(icon: &Icon) -> Option<String> {
-        match *icon {
-            Icon::ClearDay => Some("Sun"),
-            Icon::ClearNight => Some("Moon"),
-            Icon::Rain => Some("Cloud-Rain"),
-            Icon::Snow => Some("Cloud-Snow"),
-            Icon::Sleet => Some("Cloud-Snow-Alt"),
-            Icon::Wind => Some("Wind"),
-            Icon::Fog => Some("Cloud-Fog"),
-            Icon::Cloudy => Some("Cloud"),
-            Icon::PartlyCloudyDay => Some("Cloud-Sun"),
-            Icon::PartlyCloudyNight => Some("Cloud-Moon"),
-            Icon::Unknown(_) => None,
-        }.map(|x| format!("Dark-{}", x))
     }
 }
 
