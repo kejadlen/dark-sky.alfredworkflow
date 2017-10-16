@@ -119,7 +119,7 @@ impl DarkSky {
                     min.0,
                     max.0,
                     intensities.clone().iter().map(|x| x.0).collect(),
-                    4,
+                    5,
                 );
                 subtitle.push(format!("{} {} {}", min, sparkline, max));
             }
