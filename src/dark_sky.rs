@@ -8,7 +8,7 @@ use forecast;
 use sparkline;
 use theme::Theme;
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct Location {
     pub description: String,
     pub coord: Coordinate,

@@ -66,14 +66,36 @@ struct IPInfo {
 fn location() -> Result<dark_sky::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
-    if query.is_empty() {
-        let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
-        let description = format!("{}, {}", ip_info.city, ip_info.region);
-        let coord = ip_info.coord;
-        Ok(dark_sky::Location { description, coord })
-    } else {
-        let api_key = env::var("GOOGLE_API_KEY")?;
-        let geocoder = geocode::Geocoder::new(&api_key);
-        geocoder.geocode(&query)
+
+    let location = env::var("DEFAULT_LAT_LONG").ok().and_then(|lat_long| {
+        let mut split = lat_long.split(',');
+        split
+            .next()
+            .and_then(|lat| lat.parse::<f64>().ok())
+            .and_then(|lat| {
+                split
+                    .next()
+                    .and_then(|long| long.parse::<f64>().ok())
+                    .map(|long| Coordinate(lat, long))
+            })
+            .map(|coord| {
+                let description = env::var("DEFAULT_LOCATION").unwrap_or("".into());
+                dark_sky::Location { description, coord }
+            })
+    });
+
+    match (query, location) {
+        (ref query, _) if !query.is_empty() => {
+            let api_key = env::var("GOOGLE_API_KEY")?;
+            let geocoder = geocode::Geocoder::new(&api_key);
+            geocoder.geocode(&query)
+        }
+        (_, Some(ref location)) => Ok(location.clone()),
+        _ => {
+            let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
+            let description = format!("{}, {}", ip_info.city, ip_info.region);
+            let coord = ip_info.coord;
+            Ok(dark_sky::Location { description, coord })
+        }
     }
 }
