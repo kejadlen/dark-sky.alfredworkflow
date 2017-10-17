@@ -2,6 +2,7 @@ use std::path::PathBuf;
 
 use forecast::Icon;
 
+#[derive(Debug)]
 pub enum Theme {
     Light,
     Dark,

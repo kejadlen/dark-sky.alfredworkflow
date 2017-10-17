@@ -8,6 +8,7 @@ use forecast;
 use sparkline;
 use theme::Theme;
 
+#[derive(Debug)]
 pub struct DarkSky {
     pub dark_sky_api_key: String,
     pub location: location::Location,

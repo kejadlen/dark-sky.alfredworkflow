@@ -35,15 +35,15 @@ quick_main!(|| {
     } else {
         Theme::Dark
     };
-    let units = env::var("FORECAST_UNITS")
-        .map(|units| match units.as_str() {
-            "ca" => forecast::Units::Ca,
-            "uk2" => forecast::Units::Uk2,
-            "us" => forecast::Units::Us,
-            "si" => forecast::Units::Si,
-            _ => forecast::Units::Auto,
-        })
-        .unwrap_or_else(|_| forecast::Units::Auto);
+    let units = env::var("FORECAST_UNITS").unwrap_or_else(|_| "auto".into());
+    let units = match units.as_str() {
+        "auto" => forecast::Units::Auto,
+        "ca" => forecast::Units::Ca,
+        "uk2" => forecast::Units::Uk2,
+        "us" => forecast::Units::Us,
+        "si" => forecast::Units::Si,
+        units => bail!("invalid `FORECAST_UNITS`: '{}'", units),
+    };
 
     let dark_sky = dark_sky::DarkSky {
         dark_sky_api_key,
@@ -58,9 +58,7 @@ quick_main!(|| {
 fn location() -> Result<location::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
-
     let location = parse_default_location()?;
-
     match (query, location) {
         (ref query, _) if !query.is_empty() => {
             let api_key = env::var("GOOGLE_API_KEY")?;
@@ -74,13 +72,15 @@ fn location() -> Result<location::Location> {
 
 fn parse_default_location() -> Result<Option<location::Location>> {
     let location = match env::var("DEFAULT_LAT_LONG") {
-        Ok(lat_long) => {
+        Ok(ref lat_long) if !lat_long.is_empty() => {
             let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
             let mut split = lat_long.split(',');
             let coord = match (split.next(), split.next()) {
                 (Some(lat), Some(long)) => {
-                    let lat = lat.parse::<f64>().chain_err(|| "invalid DEFAULT_LAT_LONG")?;
-                    let long = long.parse::<f64>().chain_err(|| "invalid DEFAULT_LAT_LONG")?;
+                    let lat = lat.parse::<f64>()
+                        .chain_err(|| format!("invalid `DEFAULT_LAT_LONG`: {}", lat_long))?;
+                    let long = long.parse::<f64>()
+                        .chain_err(|| format!("invalid `DEFAULT_LAT_LONG`: {}", lat_long))?;
                     location::Coordinate(lat, long)
                 }
                 _ => bail!(""),
@@ -88,7 +88,7 @@ fn parse_default_location() -> Result<Option<location::Location>> {
             let location = location::Location { description, coord };
             Some(location)
         }
-        Err(_) => None,
+        _ => None,
     };
     Ok(location)
 }
