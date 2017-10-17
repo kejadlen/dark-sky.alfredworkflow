@@ -4,7 +4,7 @@ version = "3.0.0"
 authors = ["Alpha Chen <alpha.chen@gmail.com>"]
 
 [dependencies]
-alphred = { path = "../alphred-rs" }
+alphred = "0.1"
 chrono = "0.4"
 error-chain = "0.11"
 reqwest = "0.8"
