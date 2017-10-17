@@ -66,6 +66,25 @@ fn location() -> Result<location::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
 
+    let location = parse_default_location()?;
+
+    match (query, location) {
+        (ref query, _) if !query.is_empty() => {
+            let api_key = env::var("GOOGLE_API_KEY")?;
+            let geocoder = geocode::Geocoder::new(&api_key);
+            geocoder.geocode(query)
+        }
+        (_, Some(ref location)) => Ok(location.clone()),
+        _ => {
+            let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
+            let description = format!("{}, {}", ip_info.city, ip_info.region);
+            let coord = ip_info.coord;
+            Ok(location::Location { description, coord })
+        }
+    }
+}
+
+fn parse_default_location() -> Result<Option<location::Location>> {
     let location = match env::var("DEFAULT_LAT_LONG") {
         Ok(lat_long) => {
             let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
@@ -83,19 +102,5 @@ fn location() -> Result<location::Location> {
         }
         Err(_) => None,
     };
-
-    match (query, location) {
-        (ref query, _) if !query.is_empty() => {
-            let api_key = env::var("GOOGLE_API_KEY")?;
-            let geocoder = geocode::Geocoder::new(&api_key);
-            geocoder.geocode(query)
-        }
-        (_, Some(ref location)) => Ok(location.clone()),
-        _ => {
-            let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
-            let description = format!("{}, {}", ip_info.city, ip_info.region);
-            let coord = ip_info.coord;
-            Ok(location::Location { description, coord })
-        }
-    }
+    Ok(location)
 }
