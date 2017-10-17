@@ -66,22 +66,23 @@ fn location() -> Result<location::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
 
-    let location = env::var("DEFAULT_LAT_LONG").ok().and_then(|lat_long| {
-        let mut split = lat_long.split(',');
-        split
-            .next()
-            .and_then(|lat| lat.parse::<f64>().ok())
-            .and_then(|lat| {
-                split
-                    .next()
-                    .and_then(|long| long.parse::<f64>().ok())
-                    .map(|long| location::Coordinate(lat, long))
-            })
-            .map(|coord| {
-                let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
-                location::Location { description, coord }
-            })
-    });
+    let location = match env::var("DEFAULT_LAT_LONG") {
+        Ok(lat_long) => {
+            let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
+            let mut split = lat_long.split(',');
+            let coord = match (split.next(), split.next()) {
+                (Some(lat), Some(long)) => {
+                    let lat = lat.parse::<f64>().chain_err(|| "invalid DEFAULT_LAT_LONG")?;
+                    let long = long.parse::<f64>().chain_err(|| "invalid DEFAULT_LAT_LONG")?;
+                    location::Coordinate(lat, long)
+                }
+                _ => bail!(""),
+            };
+            let location = location::Location { description, coord };
+            Some(location)
+        }
+        Err(_) => None,
+    };
 
     match (query, location) {
         (ref query, _) if !query.is_empty() => {
