@@ -13,18 +13,17 @@ extern crate serde_derive;
 extern crate serde_json;
 extern crate url;
 
-mod coordinate;
 mod dark_sky;
 mod errors;
 mod forecast;
 mod geocode;
+mod location;
 mod precipitation;
 mod sparkline;
 mod theme;
 
 use std::env;
 
-use coordinate::Coordinate;
 use errors::*;
 use theme::Theme;
 
@@ -58,12 +57,12 @@ quick_main!(|| {
 
 #[derive(Debug, Deserialize)]
 struct IPInfo {
-    #[serde(rename = "loc")] coord: Coordinate,
+    #[serde(rename = "loc")] coord: location::Coordinate,
     city: String,
     region: String,
 }
 
-fn location() -> Result<dark_sky::Location> {
+fn location() -> Result<location::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
 
@@ -76,11 +75,11 @@ fn location() -> Result<dark_sky::Location> {
                 split
                     .next()
                     .and_then(|long| long.parse::<f64>().ok())
-                    .map(|long| Coordinate(lat, long))
+                    .map(|long| location::Coordinate(lat, long))
             })
             .map(|coord| {
-                let description = env::var("DEFAULT_LOCATION").unwrap_or("".into());
-                dark_sky::Location { description, coord }
+                let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
+                location::Location { description, coord }
             })
     });
 
@@ -88,14 +87,14 @@ fn location() -> Result<dark_sky::Location> {
         (ref query, _) if !query.is_empty() => {
             let api_key = env::var("GOOGLE_API_KEY")?;
             let geocoder = geocode::Geocoder::new(&api_key);
-            geocoder.geocode(&query)
+            geocoder.geocode(query)
         }
         (_, Some(ref location)) => Ok(location.clone()),
         _ => {
             let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
             let description = format!("{}, {}", ip_info.city, ip_info.region);
             let coord = ip_info.coord;
-            Ok(dark_sky::Location { description, coord })
+            Ok(location::Location { description, coord })
         }
     }
 }

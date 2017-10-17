@@ -2,21 +2,15 @@ use alphred::Item;
 use chrono::prelude::*;
 use reqwest;
 
-use coordinate::Coordinate;
+use location;
 use errors::*;
 use forecast;
 use sparkline;
 use theme::Theme;
 
-#[derive(Clone, Debug)]
-pub struct Location {
-    pub description: String,
-    pub coord: Coordinate,
-}
-
 pub struct DarkSky {
     pub dark_sky_api_key: String,
-    pub location: Location,
+    pub location: location::Location,
     pub theme: Theme,
     pub units: forecast::Units,
 }
@@ -56,8 +50,8 @@ impl DarkSky {
         Ok(())
     }
 
-    fn forecast(&self, coord: Coordinate) -> Result<forecast::Forecast> {
-        let Coordinate(lat, long) = coord;
+    fn forecast(&self, coord: location::Coordinate) -> Result<forecast::Forecast> {
+        let location::Coordinate(lat, long) = coord;
         let units = match self.units {
             forecast::Units::Auto => "auto",
             forecast::Units::Ca => "ca",
@@ -76,7 +70,7 @@ impl DarkSky {
     }
 
     fn arg(&self) -> String {
-        let Coordinate(lat, long) = self.location.coord;
+        let location::Coordinate(lat, long) = self.location.coord;
         format!("{:.4},{:.4}", lat, long)
     }
 

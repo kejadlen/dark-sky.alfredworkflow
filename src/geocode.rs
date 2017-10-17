@@ -1,9 +1,8 @@
 use reqwest;
 use url;
 
-use coordinate::Coordinate;
-use dark_sky;
 use errors;
+use location;
 
 pub struct Geocoder {
     api_key: String,
@@ -15,7 +14,7 @@ impl Geocoder {
         Self { api_key }
     }
 
-    pub fn geocode(&self, address: &str) -> errors::Result<dark_sky::Location> {
+    pub fn geocode(&self, address: &str) -> errors::Result<location::Location> {
         let client = reqwest::Client::new();
 
         let mut url = url::Url::parse("https://maps.googleapis.com/maps/api/geocode/json")?;
@@ -35,13 +34,13 @@ struct Response {
 }
 
 impl Response {
-    fn location(&self) -> Option<dark_sky::Location> {
+    fn location(&self) -> Option<location::Location> {
         let result = self.results.first();
         result.map(|result| {
             let description = result.formatted_address.clone();
             let location = &result.geometry.location;
-            let coord = Coordinate(location.lat, location.lng);
-            dark_sky::Location { description, coord }
+            let coord = location::Coordinate(location.lat, location.lng);
+            location::Location { description, coord }
         })
     }
 }
