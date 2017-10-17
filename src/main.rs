@@ -17,6 +17,7 @@ mod coordinate;
 mod dark_sky;
 mod errors;
 mod forecast;
+mod geocode;
 mod precipitation;
 mod sparkline;
 mod theme;
@@ -71,59 +72,8 @@ fn location() -> Result<dark_sky::Location> {
         let coord = ip_info.coord;
         Ok(dark_sky::Location { description, coord })
     } else {
-        geocode(&query)
+        let api_key = env::var("GOOGLE_API_KEY")?;
+        let geocoder = geocode::Geocoder::new(&api_key);
+        geocoder.geocode(&query)
     }
-}
-
-mod geocode {
-    use coordinate::Coordinate;
-    use dark_sky;
-
-    #[derive(Debug, Deserialize)]
-    pub struct Response {
-        results: Vec<Result>,
-    }
-
-    impl Response {
-        pub fn location(&self) -> Option<dark_sky::Location> {
-            let result = self.results.first();
-            result.map(|result| {
-                let description = result.formatted_address.clone();
-                let location = &result.geometry.location;
-                let coord = Coordinate(location.lat, location.lng);
-                dark_sky::Location { description, coord }
-            })
-        }
-    }
-
-    #[derive(Debug, Deserialize)]
-    struct Result {
-        formatted_address: String,
-        geometry: Geometry,
-    }
-
-    #[derive(Debug, Deserialize)]
-    struct Geometry {
-        location: Location,
-    }
-
-    #[derive(Debug, Deserialize)]
-    struct Location {
-        lat: f64,
-        lng: f64,
-    }
-}
-
-fn geocode(address: &str) -> Result<dark_sky::Location> {
-    let client = reqwest::Client::new();
-
-    let api_key = env::var("GOOGLE_API_KEY")?;
-    let mut url = url::Url::parse("https://maps.googleapis.com/maps/api/geocode/json")?;
-    url.query_pairs_mut().append_pair("address", address);
-    url.query_pairs_mut().append_pair("api_key", &api_key);
-    let response: geocode::Response = client.get(url).send()?.json()?;
-
-    response
-        .location()
-        .ok_or_else(|| format!("unable to geocode address '{}'", address).into())
 }
