@@ -27,7 +27,7 @@ impl Theme {
                 Theme::Light => "Light",
                 Theme::Dark => "Dark",
             };
-            format!("{}-{}", theme, x).into()
+            format!("icons/{}-{}.png", theme, x).into()
         })
     }
 }
