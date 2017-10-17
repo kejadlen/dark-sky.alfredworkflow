@@ -1,3 +1,7 @@
+## [3.0.0] - 2017-10-17
+
+- Rewrote it in Rust
+
 ## [2.1.2] - 2017-10-11
 
 - Vendor 2.3 gems for High Sierra.
