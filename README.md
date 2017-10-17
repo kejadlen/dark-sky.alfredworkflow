@@ -8,7 +8,6 @@
 
 - [Alfred](http://www.alfredapp.com/)
 - [Alfred Powerpack](http://www.alfredapp.com/powerpack/)
-- OS X Mavericks
 
 # Installation
 
