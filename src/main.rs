@@ -55,13 +55,6 @@ quick_main!(|| {
     dark_sky.run()
 });
 
-#[derive(Debug, Deserialize)]
-struct IPInfo {
-    #[serde(rename = "loc")] coord: location::Coordinate,
-    city: String,
-    region: String,
-}
-
 fn location() -> Result<location::Location> {
     let args: Vec<_> = env::args().skip(1).collect();
     let query = args.join(" ");
@@ -75,12 +68,7 @@ fn location() -> Result<location::Location> {
             geocoder.geocode(query)
         }
         (_, Some(ref location)) => Ok(location.clone()),
-        _ => {
-            let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
-            let description = format!("{}, {}", ip_info.city, ip_info.region);
-            let coord = ip_info.coord;
-            Ok(location::Location { description, coord })
-        }
+        _ => location::Location::from_ip(),
     }
 }
 

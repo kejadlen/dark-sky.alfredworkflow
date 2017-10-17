@@ -1,4 +1,9 @@
+use std::result;
+
+use reqwest;
 use serde::Deserialize;
+
+use errors::*;
 
 #[derive(Clone, Debug)]
 pub struct Location {
@@ -6,11 +11,27 @@ pub struct Location {
     pub coord: Coordinate,
 }
 
+#[derive(Debug, Deserialize)]
+struct IPInfo {
+    #[serde(rename = "loc")] coord: Coordinate,
+    city: String,
+    region: String,
+}
+
+impl Location {
+    pub fn from_ip() -> Result<Self> {
+        let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
+        let description = format!("{}, {}", ip_info.city, ip_info.region);
+        let coord = ip_info.coord;
+        Ok(Self { description, coord })
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct Coordinate(pub f64, pub f64);
 
 impl<'de> Deserialize<'de> for Coordinate {
-    fn deserialize<D>(deserializer: D) -> Result<Coordinate, D::Error>
+    fn deserialize<D>(deserializer: D) -> result::Result<Coordinate, D::Error>
     where
         D: ::serde::Deserializer<'de>,
     {
