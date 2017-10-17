@@ -107,17 +107,17 @@
 				<key>runningsubtext</key>
 				<string>Retrieving location/weather...</string>
 				<key>script</key>
-				<string>ruby dark-sky.rb {query}</string>
+				<string>./dark-sky {query}</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>dark-sky</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Dark Sky</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -173,17 +173,17 @@
 				<key>runningsubtext</key>
 				<string>Retrieving location/weather...</string>
 				<key>script</key>
-				<string>ruby dark-sky.rb {query}</string>
+				<string>./dark-sky {query}</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>scriptfile</key>
-				<string></string>
+				<string>dark-sky</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
 				<string>Dark Sky</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>8</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -414,7 +414,7 @@ fi #find</string>
 - `LIGHT_ICONS`: `true` gives white icons, `false` gives black icons.
 
 [dark-sky-api-key]: https://darksky.net/dev/register
-[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key</string>
+[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key3.0.0</string>
 	<key>uidata</key>
 	<dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
