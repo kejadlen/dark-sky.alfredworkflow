@@ -174,4 +174,3 @@ impl DarkSky {
         }
     }
 }
-
