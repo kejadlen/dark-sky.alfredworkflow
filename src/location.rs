@@ -51,13 +51,13 @@ impl<'de> Deserialize<'de> for Coordinate {
 
 #[test]
 fn test_deserializing_coordinate() {
-    let c: Result<Coordinate, _> = ::serde_json::from_str("\"\"");
+    let c: result::Result<Coordinate, _> = ::serde_json::from_str("\"\"");
     assert!(c.is_err());
 
-    let c: Result<Coordinate, _> = ::serde_json::from_str("\"123\"");
+    let c: result::Result<Coordinate, _> = ::serde_json::from_str("\"123\"");
     assert!(c.is_err());
 
-    let c: Result<Coordinate, _> = ::serde_json::from_str("\"123,\"");
+    let c: result::Result<Coordinate, _> = ::serde_json::from_str("\"123,\"");
     assert!(c.is_err());
 
     let Coordinate(lat, long) = ::serde_json::from_str("\"123,-123\"").unwrap();
