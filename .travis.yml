@@ -1,11 +1,11 @@
 os: osx
 language: rust
 rust:
-- nightly
+  - nightly
 before_deploy:
-- cargo build --release
-- cp target/release/dark-sky workflow
-- zip -rqj dark-sky.alfredworkflow workflow/*
+  - cargo build --release
+  - cp target/release/dark-sky workflow
+  - zip -rqj dark-sky.alfredworkflow workflow/*
 deploy:
   provider: releases
   api_key:
