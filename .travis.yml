@@ -5,7 +5,7 @@ rust:
 before_deploy:
   - cargo build --release
   - cp target/release/dark-sky workflow
-  - cd workfly && zip -rq dark-sky.alfredworkflow *
+  - cd workflow && zip -rq dark-sky.alfredworkflow *
 deploy:
   provider: releases
   api_key:
