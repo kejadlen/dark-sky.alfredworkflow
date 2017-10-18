@@ -1,6 +1,6 @@
 [package]
 name = "dark-sky"
-version = "3.0.0"
+version = "3.0.1"
 authors = ["Alpha Chen <alpha.chen@gmail.com>"]
 
 [dependencies]
