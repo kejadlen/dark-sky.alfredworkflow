@@ -22,6 +22,7 @@ mod precipitation;
 mod sparkline;
 mod theme;
 
+use std::convert::TryFrom;
 use std::env;
 
 use errors::*;
@@ -73,18 +74,10 @@ fn location() -> Result<location::Location> {
 fn parse_default_location() -> Result<Option<location::Location>> {
     let location = match env::var("DEFAULT_LAT_LONG") {
         Ok(ref lat_long) if !lat_long.is_empty() => {
+            let coord = location::Coordinate::try_from(lat_long.as_str()).map_err(|_| {
+                Error::from(format!("invalid `DEFAULT_LAT_LONG`: {}", lat_long))
+            })?;
             let description = env::var("DEFAULT_LOCATION").unwrap_or_else(|_| "".into());
-            let mut split = lat_long.split(',');
-            let coord = match (split.next(), split.next()) {
-                (Some(lat), Some(long)) => {
-                    let lat = lat.parse::<f64>()
-                        .chain_err(|| format!("invalid `DEFAULT_LAT_LONG`: {}", lat_long))?;
-                    let long = long.parse::<f64>()
-                        .chain_err(|| format!("invalid `DEFAULT_LAT_LONG`: {}", lat_long))?;
-                    location::Coordinate(lat, long)
-                }
-                _ => bail!(""),
-            };
             let location = location::Location { description, coord };
             Some(location)
         }

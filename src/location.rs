@@ -1,3 +1,4 @@
+use std::convert::TryFrom;
 use std::result;
 
 use reqwest;
@@ -29,6 +30,28 @@ impl Location {
 
 #[derive(Clone, Debug)]
 pub struct Coordinate(pub f64, pub f64);
+
+impl<'a> TryFrom<&'a str> for Coordinate {
+    type Error = ();
+
+    fn try_from(s: &str) -> result::Result<Self, ()> {
+        let mut split = s.split(',').flat_map(|s| s.parse::<f64>());
+        match (split.next(), split.next()) {
+            (Some(lat), Some(long)) => Ok(Coordinate(lat, long)),
+            _ => Err(()),
+        }
+    }
+}
+
+#[test]
+fn test_coordinate_try_from() {
+    assert!(Coordinate::try_from("1.1,-2.3").is_ok());
+
+    assert!(Coordinate::try_from("").is_err());
+    assert!(Coordinate::try_from("1").is_err());
+    assert!(Coordinate::try_from("a").is_err());
+    assert!(Coordinate::try_from("1,").is_err());
+}
 
 impl<'de> Deserialize<'de> for Coordinate {
     fn deserialize<D>(deserializer: D) -> result::Result<Coordinate, D::Error>
