@@ -5,12 +5,12 @@ rust:
 before_deploy:
   - cargo build --release
   - cp target/release/dark-sky workflow
-  - cd workflow && zip -rq dark-sky.alfredworkflow *
+  - (cd workflow && zip -rv - *) > dark-sky.alfredworkflow
 deploy:
   provider: releases
   api_key:
     secure: OuF79z87p7jfdKfh5zJPf7rEwu3AjFsr2hIqVZ8vndfoGKfaQs9DzWOI7zLJNksKqGUaADufr4IAW846AlJNWiXku1kX2iV+VKkAsb4gdT0MCUB5wTBrIADAjSbYn5o61nqy80uGiF2qgIMl4A6iocAgw1dU/1fy0xeVTrCxhd8=
-  file: workflow/dark-sky.alfredworkflow
+  file: dark-sky.alfredworkflow
   skip_cleanup: true
   on:
     tags: true
