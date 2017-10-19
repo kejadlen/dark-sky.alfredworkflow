@@ -35,13 +35,11 @@ struct Response {
 
 impl Response {
     fn location(&self) -> Option<location::Location> {
-        let result = self.results.first();
-        result.map(|result| {
-            let description = result.formatted_address.clone();
-            let location = &result.geometry.location;
-            let coord = location::Coordinate(location.lat, location.lng);
-            location::Location { description, coord }
-        })
+        let result = self.results.first()?;
+        let description = result.formatted_address.clone();
+        let location = &result.geometry.location;
+        let coord = location::Coordinate(location.lat, location.lng);
+        Some(location::Location { description, coord })
     }
 }
 

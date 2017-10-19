@@ -92,16 +92,16 @@ where
 
 impl Point {
     pub fn human_precipitation(&self) -> Option<String> {
-        match (
-            self.precip_intensity.clone(),
-            self.precip_probability.clone(),
-        ) {
-            (Some(ref intensity), Some(ref probability)) if probability.0 > 0. => Some(format!(
+        let intensity = self.precip_intensity.clone()?;
+        let probability = self.precip_probability.clone()?;
+        if probability.0 > 0. {
+            Some(format!(
                 "{} chance of {} rain.",
                 probability,
                 intensity.humanized()
-            )),
-            _ => None,
+            ))
+        } else {
+            None
         }
     }
 }

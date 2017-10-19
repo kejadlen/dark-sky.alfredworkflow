@@ -76,96 +76,88 @@ impl DarkSky {
     }
 
     fn currently(&self, point: &forecast::Point) -> Option<Item> {
-        if let (Some(title), Some(temp), Some(apparent_temp), Some(icon)) = (
-            point.summary.clone(),
-            point.temp,
-            point.apparent_temperature.clone(),
-            point.icon.clone(),
-        ) {
-            let mut subtitle = vec![
-                format!("{}°", temp.round()),
-                format!("Feels like {}", apparent_temp),
-            ];
-            if let Some(human_precip) = point.human_precipitation() {
-                subtitle.push(human_precip);
-            }
-            let subtitle = subtitle.join(" · ");
+        let title = point.summary.clone()?;
+        let temp = point.temp?;
+        let apparent_temp = point.apparent_temperature.clone()?;
+        let icon = point.icon.clone()?;
 
-            let mut item = Item::new(title);
-            item = item.subtitle(&subtitle);
-            item = item.arg(&self.arg());
-            if let Some(path) = self.theme.icon_path(&icon) {
-                item = item.icon(path.as_path());
-            }
-            Some(item)
-        } else {
-            None
+        let mut subtitle = vec![
+            format!("{}°", temp.round()),
+            format!("Feels like {}", apparent_temp),
+        ];
+        if let Some(human_precip) = point.human_precipitation() {
+            subtitle.push(human_precip);
         }
+        let subtitle = subtitle.join(" · ");
+
+        let mut item = Item::new(title);
+        item = item.subtitle(&subtitle);
+        item = item.arg(&self.arg());
+        if let Some(path) = self.theme.icon_path(&icon) {
+            item = item.icon(path.as_path());
+        }
+        Some(item)
     }
 
     fn minutely(&self, block: &forecast::Block) -> Option<Item> {
-        if let (Some(title), Some(icon)) = (block.summary.clone(), block.icon.clone()) {
-            let mut item = Item::new(title);
+        let title = block.summary.clone()?;
+        let icon = block.icon.clone()?;
 
-            let mut subtitle = Vec::new();
-            let intensities = block.precip_intensities();
-            if let (Some(min), Some(max)) = (intensities.iter().min(), intensities.iter().max()) {
-                let sparkline = sparkline::Ascii::new(
-                    min.0,
-                    max.0,
-                    intensities.clone().iter().map(|x| x.0).collect(),
-                    5,
-                );
-                subtitle.push(format!("{} {} {}", min, sparkline, max));
-            }
-            let probabilities = block.precip_probabilities();
-            if let (Some(min), Some(max)) = (probabilities.iter().min(), probabilities.iter().max())
-            {
-                let sparkline = sparkline::Ascii::new(
-                    min.0,
-                    1.,
-                    probabilities.clone().iter().map(|x| x.0).collect(),
-                    5,
-                );
-                subtitle.push(format!("{} {} {}", min, sparkline, max));
-            }
-            let subtitle = subtitle.join(" · ");
+        let mut item = Item::new(title);
 
-            item = item.subtitle(&subtitle);
-            item = item.arg(&self.arg());
-            if let Some(path) = self.theme.icon_path(&icon) {
-                item = item.icon(path.as_path());
-            }
-            Some(item)
-        } else {
-            None
+        let mut subtitle = Vec::new();
+        let intensities = block.precip_intensities();
+        if let (Some(min), Some(max)) = (intensities.iter().min(), intensities.iter().max()) {
+            let sparkline = sparkline::Ascii::new(
+                min.0,
+                max.0,
+                intensities.clone().iter().map(|x| x.0).collect(),
+                5,
+            );
+            subtitle.push(format!("{} {} {}", min, sparkline, max));
         }
+        let probabilities = block.precip_probabilities();
+        if let (Some(min), Some(max)) = (probabilities.iter().min(), probabilities.iter().max()) {
+            let sparkline = sparkline::Ascii::new(
+                min.0,
+                1.,
+                probabilities.clone().iter().map(|x| x.0).collect(),
+                5,
+            );
+            subtitle.push(format!("{} {} {}", min, sparkline, max));
+        }
+        let subtitle = subtitle.join(" · ");
+
+        item = item.subtitle(&subtitle);
+        item = item.arg(&self.arg());
+        if let Some(path) = self.theme.icon_path(&icon) {
+            item = item.icon(path.as_path());
+        }
+
+        Some(item)
     }
 
     fn daily(&self, point: &forecast::Point) -> Option<Item> {
-        if let (Some(ref summary), Some(ref min), Some(ref max), Some(ref icon)) = (
-            point.summary.clone(),
-            point.apparent_temperature_min.clone(),
-            point.apparent_temperature_max.clone(),
-            point.icon.clone(),
-        ) {
-            let weekday = if point.time.date() == Local::today() {
-                "Today".into()
-            } else {
-                point.time.format("%A").to_string()
-            };
-            let title = format!("{} - {}", weekday, summary);
-            let subtitle = format!("Low: {} · High: {}", min, max);
-            let arg = format!("{}/{}", self.arg(), point.time.timestamp());
-            let mut item = Item::new(title);
-            item = item.subtitle(&subtitle);
-            item = item.arg(&arg);
-            if let Some(path) = self.theme.icon_path(icon) {
-                item = item.icon(path.as_path());
-            }
-            Some(item)
+        let summary = point.summary.clone()?;
+        let min = point.apparent_temperature_min.clone()?;
+        let max = point.apparent_temperature_max.clone()?;
+        let icon = point.icon.clone()?;
+
+        let weekday = if point.time.date() == Local::today() {
+            "Today".into()
         } else {
-            None
+            point.time.format("%A").to_string()
+        };
+        let title = format!("{} - {}", weekday, summary);
+        let subtitle = format!("Low: {} · High: {}", min, max);
+        let arg = format!("{}/{}", self.arg(), point.time.timestamp());
+
+        let mut item = Item::new(title);
+        item = item.subtitle(&subtitle);
+        item = item.arg(&arg);
+        if let Some(path) = self.theme.icon_path(&icon) {
+            item = item.icon(path.as_path());
         }
+        Some(item)
     }
 }
