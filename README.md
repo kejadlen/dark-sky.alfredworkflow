@@ -13,7 +13,7 @@
 
 Download and install the [workflow][download].
 
-[download]: https://github.com/kejadlen/dark-sky.alfredworkflow/releases/download/v2.0.0/DarkSky.alfredworkflow
+[download]: https://github.com/kejadlen/dark-sky.alfredworkflow/releases/download/v3.0.2/dark-sky.alfredworkflow
 
 These environment variables can be [configured in Alfred][env-vars]:
 
