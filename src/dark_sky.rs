@@ -18,7 +18,7 @@ pub struct DarkSky {
 
 impl DarkSky {
     pub fn run(&self) -> Result<()> {
-        let forecast = self.forecast(self.location.coord.clone())?;
+        let forecast = self.forecast(&self.location.coord)?;
 
         let mut items = Vec::new();
 
@@ -51,8 +51,8 @@ impl DarkSky {
         Ok(())
     }
 
-    fn forecast(&self, coord: location::Coordinate) -> Result<forecast::Forecast> {
-        let location::Coordinate(lat, long) = coord;
+    fn forecast(&self, coord: &location::Coordinate) -> Result<forecast::Forecast> {
+        let &location::Coordinate(lat, long) = coord;
         let units = match self.units {
             forecast::Units::Auto => "auto",
             forecast::Units::Ca => "ca",
