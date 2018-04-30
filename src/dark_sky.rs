@@ -2,9 +2,9 @@ use alphred::Item;
 use chrono::prelude::*;
 use reqwest;
 
-use location;
 use errors::*;
 use forecast;
+use location;
 use sparkline;
 use theme::Theme;
 
@@ -62,10 +62,7 @@ impl DarkSky {
         };
         let url = format!(
             "https://api.darksky.net/forecast/{}/{},{}?units={}",
-            self.dark_sky_api_key,
-            lat,
-            long,
-            units,
+            self.dark_sky_api_key, lat, long, units,
         );
         Ok(reqwest::get(&url)?.json()?)
     }

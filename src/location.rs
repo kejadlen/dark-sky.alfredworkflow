@@ -14,7 +14,8 @@ pub struct Location {
 
 #[derive(Debug, Deserialize)]
 struct IPInfo {
-    #[serde(rename = "loc")] coord: Coordinate,
+    #[serde(rename = "loc")]
+    coord: Coordinate,
     city: String,
     region: String,
 }
