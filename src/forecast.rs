@@ -60,7 +60,6 @@ impl<'de> Deserialize<'de> for Icon {
     }
 }
 
-
 #[derive(Debug, Deserialize)]
 pub struct Forecast {
     pub currently: Option<Point>,
@@ -71,7 +70,8 @@ pub struct Forecast {
 #[derive(Debug, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Point {
-    #[serde(rename = "temperature")] pub temp: Option<f64>,
+    #[serde(rename = "temperature")]
+    pub temp: Option<f64>,
     pub apparent_temperature: Option<Temperature>,
     pub apparent_temperature_min: Option<Temperature>,
     pub apparent_temperature_max: Option<Temperature>,
@@ -79,7 +79,8 @@ pub struct Point {
     pub precip_intensity: Option<Intensity>,
     pub precip_probability: Option<Probability>,
     pub summary: Option<String>,
-    #[serde(deserialize_with = "deserialize_timestamp")] pub time: DateTime<Local>,
+    #[serde(deserialize_with = "deserialize_timestamp")]
+    pub time: DateTime<Local>,
 }
 
 fn deserialize_timestamp<'de, D>(deserializer: D) -> result::Result<DateTime<Local>, D::Error>
