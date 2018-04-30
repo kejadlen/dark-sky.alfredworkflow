@@ -1,3 +1,8 @@
+## [3.0.3] - 2018-04-29
+
+- Update OneUpdator support since the repo structure changed.
+  ([@vitorvalvao](https://github.com/kejadlen/dark-sky.alfredworkflow/pull/25))
+
 ## [3.0.2] - 2017-10-17
 
 - Fix the release to include the icons in the right location.
