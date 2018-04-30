@@ -6,13 +6,13 @@ pub struct Intensity(pub f64);
 
 impl Intensity {
     pub fn humanized(&self) -> String {
-        let intensity = if (0.0..=0.002).contains(self.0) {
+        let intensity = if (0.0..=0.002).contains(&self.0) {
             "no"
-        } else if (0.002..=0.017).contains(self.0) {
+        } else if (0.002..=0.017).contains(&self.0) {
             "very light"
-        } else if (0.017..=0.1).contains(self.0) {
+        } else if (0.017..=0.1).contains(&self.0) {
             "light"
-        } else if (0.1..=0.4).contains(self.0) {
+        } else if (0.1..=0.4).contains(&self.0) {
             "moderate"
         } else {
             "heavy"
