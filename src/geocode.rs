@@ -19,7 +19,7 @@ impl Geocoder {
 
         let mut url = url::Url::parse("https://maps.googleapis.com/maps/api/geocode/json")?;
         url.query_pairs_mut().append_pair("address", address);
-        url.query_pairs_mut().append_pair("api_key", &self.api_key);
+        url.query_pairs_mut().append_pair("key", &self.api_key);
         let response: Response = client.get(url).send()?.json()?;
 
         response
