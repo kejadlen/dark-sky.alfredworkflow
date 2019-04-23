@@ -431,12 +431,14 @@ fi</string>
 - `DARK_SKY_API_KEY`: Get an API key [here][dark-sky-api-key].
 - `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding queries. *This can be omitted if you only want the forecast for the current location*.)
 - `FORECAST_UNITS`: Defaults to `auto`, which sets the units based on the location. Use `si` for Celsius and `us` for Fahrenheit.
+- `FORECAST_LANG`: Defaults to `en`. See [Dark Sky documentation][dark-sky-lang] for full list of language options.
 - `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex: `47.7396,-122.3426` for Seattle.
 - `DEFAULT_LOCATION`: Used for displaying the location name when using `DEFAULT_LAT_LONG`.
 - `LIGHT_ICONS`: `true` gives white icons, `false` gives black icons.
 
 [dark-sky-api-key]: https://darksky.net/dev/register
-[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key</string>
+[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
+[dark-sky-lang]: https://darksky.net/dev/docs#forecast-request</string>
 	<key>uidata</key>
 	<dict>
 		<key>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</key>
@@ -498,6 +500,8 @@ fi</string>
 		<string></string>
 		<key>DEFAULT_LOCATION</key>
 		<string></string>
+		<key>FORECAST_LANG</key>
+		<string>en</string>
 		<key>FORECAST_UNITS</key>
 		<string>auto</string>
 		<key>GOOGLE_API_KEY</key>
@@ -514,7 +518,7 @@ fi</string>
 		<string>GOOGLE_API_KEY</string>
 	</array>
 	<key>version</key>
-	<string>3.0.4</string>
+	<string>3.1.0</string>
 	<key>webaddress</key>
 	<string>http://github.com/kejadlen/dark-sky.alfredworkflow</string>
 </dict>

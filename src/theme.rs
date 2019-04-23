@@ -22,7 +22,8 @@ impl Theme {
             Icon::PartlyCloudyDay => Some("Cloud-Sun"),
             Icon::PartlyCloudyNight => Some("Cloud-Moon"),
             Icon::Unknown(_) => None,
-        }.map(|x| {
+        }
+        .map(|x| {
             let theme = match *self {
                 Theme::Light => "Light",
                 Theme::Dark => "Dark",

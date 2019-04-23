@@ -62,7 +62,7 @@ impl Ord for Probability {
 impl fmt::Display for Intensity {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let intensity = format!("{:.3}", (self.0 * 1000.).round() / 1000.);
-        let mut intensity = String::from(intensity.trim_right_matches('0'));
+        let mut intensity = String::from(intensity.trim_end_matches('0'));
         if intensity.ends_with('.') {
             intensity.push('0');
         }

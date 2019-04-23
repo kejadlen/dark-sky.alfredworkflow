@@ -22,7 +22,8 @@ impl fmt::Display for Ascii {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let ticks = vec!['▁', '▂', '▃', '▄', '▅', '▆', '▇'];
         let ticks_len = (ticks.len() - 1) as f64;
-        let sparkline: String = self.data
+        let sparkline: String = self
+            .data
             .iter()
             .step_by(self.step)
             .map(|x| {

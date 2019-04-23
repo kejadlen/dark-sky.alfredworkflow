@@ -1,4 +1,3 @@
-#![feature(range_contains, try_from)]
 #![recursion_limit = "1024"]
 
 extern crate alphred;
@@ -45,12 +44,70 @@ quick_main!(|| {
         "si" => forecast::Units::Si,
         units => bail!("invalid `FORECAST_UNITS`: '{}'", units),
     };
+    let lang = env::var("FORECAST_LANG").unwrap_or_else(|_| "en".into());
+    let lang = match lang.as_str() {
+        "ar" => forecast::Lang::Arabic,
+        "az" => forecast::Lang::Azerbaijani,
+        "be" => forecast::Lang::Belarusian,
+        "bg" => forecast::Lang::Bulgarian,
+        "bn" => forecast::Lang::Bengali,
+        "bs" => forecast::Lang::Bosnian,
+        "ca" => forecast::Lang::Catalan,
+        "cs" => forecast::Lang::Czech,
+        "da" => forecast::Lang::Danish,
+        "de" => forecast::Lang::German,
+        "el" => forecast::Lang::Greek,
+        "en" => forecast::Lang::English,
+        "eo" => forecast::Lang::Esperanto,
+        "es" => forecast::Lang::Spanish,
+        "et" => forecast::Lang::Estonian,
+        "fi" => forecast::Lang::Finnish,
+        "fr" => forecast::Lang::French,
+        "he" => forecast::Lang::Hebrew,
+        "hi" => forecast::Lang::Hindi,
+        "hr" => forecast::Lang::Croatian,
+        "hu" => forecast::Lang::Hungarian,
+        "id" => forecast::Lang::Indonesian,
+        "is" => forecast::Lang::Icelandic,
+        "it" => forecast::Lang::Italian,
+        "ja" => forecast::Lang::Japanese,
+        "ka" => forecast::Lang::Georgian,
+        "kn" => forecast::Lang::Kannada,
+        "ko" => forecast::Lang::Korean,
+        "kw" => forecast::Lang::Cornish,
+        "lv" => forecast::Lang::Latvian,
+        "ml" => forecast::Lang::Malayam,
+        "mr" => forecast::Lang::Marathi,
+        "nb" => forecast::Lang::NorwegianBokmal,
+        "nl" => forecast::Lang::Dutch,
+        "no" => forecast::Lang::NorwegianBokmal,
+        "pa" => forecast::Lang::Punjabi,
+        "pl" => forecast::Lang::Polish,
+        "pt" => forecast::Lang::Portuguese,
+        "ro" => forecast::Lang::Romanian,
+        "ru" => forecast::Lang::Russian,
+        "sk" => forecast::Lang::Slovak,
+        "sl" => forecast::Lang::Slovenian,
+        "sr" => forecast::Lang::Serbian,
+        "sv" => forecast::Lang::Swedish,
+        "ta" => forecast::Lang::Tamil,
+        "te" => forecast::Lang::Telugu,
+        "tet" => forecast::Lang::Tetum,
+        "tr" => forecast::Lang::Turkish,
+        "uk" => forecast::Lang::Ukrainian,
+        "ur" => forecast::Lang::Urdu,
+        "x-pig-latin" => forecast::Lang::IgpayAtinlay,
+        "zh" => forecast::Lang::SimplifiedChinese,
+        "zh-tw" => forecast::Lang::TraditionalChinese,
+        lang => bail!("invalid `FORECAST_LANG`: '{}'", lang),
+    };
 
     let dark_sky = dark_sky::DarkSky {
         dark_sky_api_key,
         location,
         theme,
         units,
+        lang,
     };
 
     dark_sky.run()

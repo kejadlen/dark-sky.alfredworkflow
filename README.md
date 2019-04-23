@@ -23,13 +23,18 @@ These environment variables can be [configured in Alfred][env-vars]:
   location*.)
 - `FORECAST_UNITS`: Defaults to `auto`, which sets the units based on the
   location. Use `si` for Celsius and `us` for Fahrenheit.
-- `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex: `47.7396,-122.3426` for Seattle.
-- `DEFAULT_LOCATION`: Used for displaying the location name when using `DEFAULT_LAT_LONG`.
+- `FORECAST_LANG`: Defaults to `en`. See [Dark Sky
+  documentation][dark-sky-lang] for full list of language options.
+- `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex:
+  `47.7396,-122.3426` for Seattle.
+- `DEFAULT_LOCATION`: Used for displaying the location name when using
+  `DEFAULT_LAT_LONG`.
 - `LIGHT_ICONS`: `true` gives white icons, `false` gives black icons.
 
 [env-vars]: https://www.alfredapp.com/help/workflows/advanced/variables/
 [dark-sky-api-key]: https://darksky.net/dev/register
 [google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
+[dark-sky-lang]: https://darksky.net/dev/docs#forecast-request
 
 # Attributions
 
