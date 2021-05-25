@@ -1,4 +1,5 @@
 use reqwest;
+use serde::Deserialize;
 use url;
 
 use errors;
@@ -15,7 +16,7 @@ impl Geocoder {
     }
 
     pub fn geocode(&self, address: &str) -> errors::Result<location::Location> {
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
 
         let mut url = url::Url::parse("https://maps.googleapis.com/maps/api/geocode/json")?;
         url.query_pairs_mut().append_pair("address", address);

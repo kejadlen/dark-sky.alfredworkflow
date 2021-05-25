@@ -1,6 +1,8 @@
 use std::cmp::Ordering;
 use std::fmt;
 
+use serde::Deserialize;
+
 #[derive(Clone, Debug, Deserialize)]
 pub struct Intensity(pub f64);
 

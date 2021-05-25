@@ -22,7 +22,7 @@ struct IPInfo {
 
 impl Location {
     pub fn from_ip() -> Result<Self> {
-        let ip_info: IPInfo = reqwest::get("https://ipinfo.io/json")?.json()?;
+        let ip_info: IPInfo = reqwest::blocking::get("https://ipinfo.io/json")?.json()?;
         let description = format!("{}, {}", ip_info.city, ip_info.region);
         let coord = ip_info.coord;
         Ok(Self { description, coord })

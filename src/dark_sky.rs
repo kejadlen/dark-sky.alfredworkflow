@@ -120,7 +120,7 @@ impl DarkSky {
             "https://{}/forecast/{}/{},{}?units={}&lang={}",
             self.dark_sky_endpoint, self.dark_sky_api_key, lat, long, units, lang
         );
-        Ok(reqwest::get(&url)?.json()?)
+        Ok(reqwest::blocking::get(&url)?.json()?)
     }
 
     fn arg(&self) -> String {
