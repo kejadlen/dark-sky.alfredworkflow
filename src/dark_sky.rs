@@ -10,6 +10,7 @@ use theme::Theme;
 
 #[derive(Debug)]
 pub struct DarkSky {
+    pub dark_sky_endpoint: String,
     pub dark_sky_api_key: String,
     pub location: location::Location,
     pub theme: Theme,
@@ -116,8 +117,8 @@ impl DarkSky {
             forecast::Lang::TraditionalChinese => "zh-tw",
         };
         let url = format!(
-            "https://api.darksky.net/forecast/{}/{},{}?units={}&lang={}",
-            self.dark_sky_api_key, lat, long, units, lang
+            "https://{}/forecast/{}/{},{}?units={}&lang={}",
+            self.dark_sky_endpoint, self.dark_sky_api_key, lat, long, units, lang
         );
         Ok(reqwest::get(&url)?.json()?)
     }

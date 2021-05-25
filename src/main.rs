@@ -28,6 +28,8 @@ use errors::*;
 use theme::Theme;
 
 quick_main!(|| {
+    let dark_sky_endpoint =
+        env::var("DARK_SKY_ENDPOINT").unwrap_or_else(|_| "api.darksky.net".into());
     let dark_sky_api_key = env::var("DARK_SKY_API_KEY")?;
     let location = location()?;
     let theme = if env::var("LIGHT_ICONS") == Ok("true".into()) {
@@ -103,6 +105,7 @@ quick_main!(|| {
     };
 
     let dark_sky = dark_sky::DarkSky {
+        dark_sky_endpoint,
         dark_sky_api_key,
         location,
         theme,

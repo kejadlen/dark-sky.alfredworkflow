@@ -143,7 +143,7 @@ fn deserialize_timestamp<'de, D>(deserializer: D) -> result::Result<DateTime<Loc
 where
     D: ::serde::Deserializer<'de>,
 {
-    let unix_time = i64::deserialize(deserializer)?;
+    let unix_time = f64::deserialize(deserializer)? as i64;
     Ok(Local.timestamp(unix_time, 0))
 }
 

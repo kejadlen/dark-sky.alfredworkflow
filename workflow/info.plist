@@ -88,6 +88,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -126,7 +128,7 @@
 			<key>uid</key>
 			<string>2A5C0A87-204E-49EA-94A7-8E62BB4EFD8A</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -154,6 +156,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -192,7 +196,7 @@
 			<key>uid</key>
 			<string>3331E3E1-4FAE-41FD-8133-DAB62076AB91</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -201,6 +205,8 @@
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -307,7 +313,7 @@ fi</string>
 			<key>uid</key>
 			<string>B9B6DB3D-FF10-4E82-B5F3-AC80EF058E0D</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -316,6 +322,8 @@ fi</string>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
@@ -422,7 +430,7 @@ fi</string>
 			<key>uid</key>
 			<string>E8F22EA9-54D4-4F7D-8AAB-5875A39AE683</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>readme</key>
@@ -496,6 +504,8 @@ fi</string>
 	<dict>
 		<key>DARK_SKY_API_KEY</key>
 		<string></string>
+		<key>DARK_SKY_ENDPOINT</key>
+		<string>api.pirateweather.net</string>
 		<key>DEFAULT_LAT_LONG</key>
 		<string></string>
 		<key>DEFAULT_LOCATION</key>
