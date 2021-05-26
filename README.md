@@ -4,16 +4,16 @@
 
 [screenshot]: http://i.imgur.com/lbA9fPW.png
 
-## Requirements
+Support [Pirate Weather](https://weather.pirateweather.net/):
 
-- [Alfred](http://www.alfredapp.com/)
-- [Alfred Powerpack](http://www.alfredapp.com/powerpack/)
+- https://www.buymeacoffee.com/pirateweather
+- https://github.com/sponsors/alexander0042
 
 ## Installation
 
 Download and install the [workflow][download].
 
-[download]: https://github.com/kejadlen/pirate-weather.alfredworkflow/releases/download/v4.0.0/dark-sky.alfredworkflow
+[download]: https://github.com/kejadlen/pirate-weather.alfredworkflow/releases/download/v4.0.0/pirate-weather.alfredworkflow
 
 These environment variables can be [configured in Alfred][env-vars]:
 
