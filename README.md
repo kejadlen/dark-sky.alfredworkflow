@@ -1,44 +1,20 @@
 # Dark Sky Workflow for Alfred
 
-![screenshot][screenshot]
+With [Dark Sky shutting down their API][dark-sky-incredible-journey], this has
+been replaced by a [Pirate Weather workflow][pirate-weather-workflow].
 
-[screenshot]: http://i.imgur.com/lbA9fPW.png
+[dark-sky-incredible-journey]: https://blog.darksky.net/
+[pirate-weather-workflow]: https://github.com/kejadlen/pirate-weather.alfredworkflow/
 
-# Requirements
+## Migration
 
-- [Alfred](http://www.alfredapp.com/)
-- [Alfred Powerpack](http://www.alfredapp.com/powerpack/)
+[Obtain a Pirate Weather API key][pirate-weather-getting-started] and set
+`PIRATE_WEATHER_API_KEY` in the workflow environment variables.
 
-# Installation
+[pirate-weather-getting-started]: https://pirateweather.net/getting-started
 
-Download and install the [workflow][download].
+## Notes
 
-[download]: https://github.com/kejadlen/dark-sky.alfredworkflow/releases/download/v3.0.2/dark-sky.alfredworkflow
-
-These environment variables can be [configured in Alfred][env-vars]:
-
-- `DARK_SKY_API_KEY`: Get an API key [here][dark-sky-api-key].
-- `GOOGLE_API_KEY`: Get an API key [here][google-api-key]. (Used for geocoding
-  queries. *This can be omitted if you only want the forecast for the current
-  location*.)
-- `FORECAST_UNITS`: Defaults to `auto`, which sets the units based on the
-  location. Use `si` for Celsius and `us` for Fahrenheit.
-- `FORECAST_LANG`: Defaults to `en`. See [Dark Sky
-  documentation][dark-sky-lang] for full list of language options.
-- `DEFAULT_LAT_LONG`: Set this to override IP geolocation. Ex:
-  `47.7396,-122.3426` for Seattle.
-- `DEFAULT_LOCATION`: Used for displaying the location name when using
-  `DEFAULT_LAT_LONG`.
-- `LIGHT_ICONS`: `true` gives white icons, `false` gives black icons.
-
-[env-vars]: https://www.alfredapp.com/help/workflows/advanced/variables/
-[dark-sky-api-key]: https://darksky.net/dev/register
-[google-api-key]: https://developers.google.com/maps/documentation/geocoding/#api_key
-[dark-sky-lang]: https://darksky.net/dev/docs#forecast-request
-
-# Attributions
-
-- [Climacons](http://adamwhitcroft.com/climacons/)
-- [Dark Sky API](https://darksky.net/dev/docs)
-- [Google Geocoding API](https://developers.google.com/maps/documentation/geocoding/)
-- [ipinfo.io](http://ipinfo.io/)
+You can still use Dark Sky as a data source until the API is actually turned
+off by setting the `PIRATE_WEATHER_ENDPOINT` environment variable to
+`api.darksky.net`.
