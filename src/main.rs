@@ -10,7 +10,7 @@ extern crate serde;
 extern crate serde_json;
 extern crate url;
 
-mod dark_sky;
+mod pirate_weather;
 mod errors;
 mod forecast;
 mod geocode;
@@ -26,9 +26,9 @@ use errors::*;
 use theme::Theme;
 
 quick_main!(|| {
-    let dark_sky_endpoint =
-        env::var("DARK_SKY_ENDPOINT").unwrap_or_else(|_| "api.darksky.net".into());
-    let dark_sky_api_key = env::var("DARK_SKY_API_KEY")?;
+    let pirate_weather_endpoint =
+        env::var("PIRATE_WEATHER_ENDPOINT").unwrap_or_else(|_| "api.pirateweather.net".into());
+    let pirate_weather_api_key = env::var("PIRATE_WEATHER_API_KEY")?;
     let location = location()?;
     let theme = if env::var("LIGHT_ICONS") == Ok("true".into()) {
         Theme::Light
@@ -102,16 +102,16 @@ quick_main!(|| {
         lang => bail!("invalid `FORECAST_LANG`: '{}'", lang),
     };
 
-    let dark_sky = dark_sky::DarkSky {
-        dark_sky_endpoint,
-        dark_sky_api_key,
+    let pirate_weather = pirate_weather::PirateWeather {
+        pirate_weather_endpoint,
+        pirate_weather_api_key,
         location,
         theme,
         units,
         lang,
     };
 
-    dark_sky.run()
+    pirate_weather.run()
 });
 
 fn location() -> Result<location::Location> {

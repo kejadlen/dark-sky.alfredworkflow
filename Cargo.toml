@@ -1,5 +1,5 @@
 [package]
-name = "dark-sky"
+name = "pirate-weather"
 version = "4.0.0"
 authors = ["Alpha Chen <alpha@kejadlen.dev>"]
 

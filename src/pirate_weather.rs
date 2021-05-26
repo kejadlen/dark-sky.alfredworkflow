@@ -9,25 +9,25 @@ use sparkline;
 use theme::Theme;
 
 #[derive(Debug)]
-pub struct DarkSky {
-    pub dark_sky_endpoint: String,
-    pub dark_sky_api_key: String,
+pub struct PirateWeather {
+    pub pirate_weather_endpoint: String,
+    pub pirate_weather_api_key: String,
     pub location: location::Location,
     pub theme: Theme,
     pub units: forecast::Units,
     pub lang: forecast::Lang,
 }
 
-impl DarkSky {
+impl PirateWeather {
     pub fn run(&self) -> Result<()> {
         let forecast = self.forecast(&self.location.coord)?;
 
         let mut items = Vec::new();
 
         let item = Item::new(self.location.description.clone())
-            .subtitle("• Powered by Dark Sky")
+            .subtitle("• Powered by Pirate Weather")
             .arg(&self.arg())
-            .icon("icons/dark_sky.png");
+            .icon("icons/pirate_weather.png");
         items.push(item);
 
         if let Some(item) = forecast.currently.and_then(|point| self.currently(&point)) {
@@ -118,7 +118,7 @@ impl DarkSky {
         };
         let url = format!(
             "https://{}/forecast/{}/{},{}?units={}&lang={}",
-            self.dark_sky_endpoint, self.dark_sky_api_key, lat, long, units, lang
+            self.pirate_weather_endpoint, self.pirate_weather_api_key, lat, long, units, lang
         );
         Ok(reqwest::blocking::get(&url)?.json()?)
     }

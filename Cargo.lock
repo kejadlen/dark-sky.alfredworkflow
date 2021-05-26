@@ -116,18 +116,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea221b5284a47e40033bf9b66f35f984ec0ea2931eb03505246cd27a963f981b"
 
 [[package]]
-name = "dark-sky"
-version = "4.0.0"
-dependencies = [
- "alphred",
- "chrono",
- "error-chain",
- "reqwest",
- "serde",
- "url",
-]
-
-[[package]]
 name = "encoding_rs"
 version = "0.8.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -562,6 +550,19 @@ name = "pin-utils"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
+
+[[package]]
+name = "pirate-weather"
+version = "4.0.0"
+dependencies = [
+ "alphred",
+ "chrono",
+ "error-chain",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "url",
+]
 
 [[package]]
 name = "pkg-config"
