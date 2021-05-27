@@ -8,9 +8,12 @@ been replaced by a [Pirate Weather workflow][pirate-weather-workflow].
 
 ## Migration
 
-[Obtain a Pirate Weather API key][pirate-weather-getting-started] and set
-`PIRATE_WEATHER_API_KEY` in the workflow environment variables.
+Download and install the the latest [pirate-weather.alfred-workflow
+release][pirate-weather-workflow-releases].  [Obtain a Pirate Weather API
+key][pirate-weather-getting-started] and set `PIRATE_WEATHER_API_KEY` in the
+workflow environment variables.
 
+[pirate-weather-workflow-releases]: https://github.com/kejadlen/pirate-weather.alfredworkflow/releases
 [pirate-weather-getting-started]: https://pirateweather.net/getting-started
 
 ## Notes
